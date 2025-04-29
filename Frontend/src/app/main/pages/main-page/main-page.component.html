@@ -1,0 +1,81 @@
+<div *ngIf="tipoUsuario === 'admin'; else headerNormal">
+  <component-header-admin></component-header-admin>
+</div>
+
+<ng-template #headerNormal>
+  <component-header></component-header>
+</ng-template>
+
+<!-- bg-gradient-to-b from-green-700 to-green-500 -->
+<!-- El slice es para solo mostrar los 10 primeros equipos -->
+<main class="p-8 flex gap-6 text-white font-sans">
+  <section
+    class="bg-green-100 text-green-900 p-6 rounded-lg w-1/3 flex-shrink-0 border-4 border-green-400 shadow-lg"
+  >
+    <h2 class="text-2xl font-bold uppercase text-green-600">Clasificación</h2>
+    <ul class="mt-4 space-y-2">
+      <li
+        *ngFor="let equipo of equipos | slice : 0 : 10; let i = index"
+        class="bg-green-500 border-2 border-green-400 p-2 rounded-md shadow-md text-white hover:scale-105 transition-transform"
+      >
+        {{ i + 1 }}.- {{ equipo.nombre }} - {{ equipo.puntos }} pts
+      </li>
+    </ul>
+  </section>
+
+  <div class="flex-1 flex flex-col gap-6">
+    <section
+      class="bg-green-100 text-green-900 p-6 rounded-lg border-4 border-green-400 shadow-lg"
+    >
+      <h2 class="text-2xl font-bold uppercase text-green-600">
+        Tablón de partidos
+      </h2>
+      <div class="mt-4 space-y-2">
+        <div
+          *ngFor="let partido of partidos"
+          class="bg-green-500 border-2 border-green-400 p-4 rounded-md shadow-md text-white"
+        >
+          {{ partido.nombre_equipo_local || "Falta por determinar" }} vs
+          {{ partido.nombre_equipo_visitante || "Falta por determinar" }} -
+          {{
+            partido.fecha
+              ? (partido.fecha | date : "dd-MM-yyyy")
+              : "Fecha no establecida"
+          }}
+          -
+          {{ partido.hora || "Hora no establecida" }}
+        </div>
+      </div>
+    </section>
+
+    <div class="flex gap-6">
+      <section
+        class="bg-green-100 text-green-900 p-6 rounded-lg w-1/2 border-4 border-green-400 shadow-lg"
+      >
+        <h3 class="text-xl font-bold uppercase text-green-600">
+          Máximo Goleador
+        </h3>
+        <p
+          class="mt-2 bg-green-500 border-2 border-green-400 p-4 rounded-md shadow-md text-white"
+          *ngFor="let goleadores of maxGoleadores | slice : 0 : 3"
+        >
+          {{ goleadores.nombre }} - {{ goleadores.goles }} goles
+        </p>
+      </section>
+
+      <section
+        class="bg-green-100 text-green-900 p-6 rounded-lg w-1/2 border-4 border-green-400 shadow-lg"
+      >
+        <h3 class="text-xl font-bold uppercase text-green-600">
+          Máximo Asistente
+        </h3>
+        <p
+          class="mt-2 bg-green-500 border-2 border-green-400 p-4 rounded-md shadow-md text-white"
+          *ngFor="let asistentes of maxAsistentes | slice : 0 : 3"
+        >
+          {{ asistentes.nombre }} - {{ asistentes.asistencias }} asistencias
+        </p>
+      </section>
+    </div>
+  </div>
+</main>

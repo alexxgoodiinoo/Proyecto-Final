@@ -1,0 +1,193 @@
+<component-header-admin></component-header-admin>
+<a
+  routerLink="../form"
+  class="text-lg font-semibold hover:text-yellow-400 transition"
+  >Añadir Partido</a
+>
+
+<div class="overflow-x-auto shadow-md sm:rounded-lg m-5">
+  <table
+    class="table table-bordered table-striped table-sm w-full text-gray-500 dark:text-gray-400"
+    style="table-layout: fixed"
+  >
+    <thead class="bg-green-800 text-white">
+      <tr>
+        <th scope="col" class="px-4 py-2 text-sm font-semibold text-center">
+          Local
+        </th>
+        <th scope="col" class="px-4 py-2 text-sm font-semibold text-center">
+          Visitante
+        </th>
+        <th scope="col" class="px-4 py-2 text-sm font-semibold text-center">
+          Fecha
+        </th>
+        <th scope="col" class="px-4 py-2 text-sm font-semibold text-center">
+          Hora
+        </th>
+        <th scope="col" class="px-4 py-2 text-sm font-semibold text-center">
+          Resultado
+        </th>
+        <th scope="col" class="px-4 py-2 text-sm font-semibold text-center">
+          Editar
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let partido of partidos; let i = index"
+        [ngClass]="{
+          'bg-green-100': i % 2 === 0,
+          'bg-green-300': i % 2 !== 0
+        }"
+        class="border-b dark:border-gray-700 border-gray-200"
+      >
+        <td class="px-4 py-2 text-center">
+          <ng-container
+            *ngIf="editandoPartidoId !== partido.id; else editEquipoLocal"
+          >
+            {{ partido.nombre_equipo_local || "Por determinar" }}
+          </ng-container>
+          <ng-template #editEquipoLocal>
+            <select
+              [(ngModel)]="partido.equipo_local"
+              class="border-2 border-green-600 px-3 py-1 rounded w-full"
+            >
+              <option value="" disabled>Selecciona el equipo local</option>
+              <option
+                *ngFor="let equipo of equipos"
+                [ngValue]="equipo.id"
+                [disabled]="
+                  equipo.nombre === partido.nombre_equipo_local ||
+                  equipo.nombre === partido.nombre_equipo_visitante
+                "
+                [ngClass]="{
+                  'text-gray-400':
+                    equipo.nombre === partido.nombre_equipo_local ||
+                    equipo.nombre === partido.nombre_equipo_visitante,
+                  'text-black': !(
+                    equipo.nombre === partido.nombre_equipo_local ||
+                    equipo.nombre === partido.nombre_equipo_visitante
+                  )
+                }"
+              >
+                {{ equipo.nombre }}
+              </option>
+            </select>
+          </ng-template>
+        </td>
+        <td class="px-4 py-2 text-center">
+          <ng-container
+            *ngIf="editandoPartidoId !== partido.id; else editEquipoVisitante"
+          >
+            {{ partido.nombre_equipo_visitante || "Por determinar" }}
+          </ng-container>
+          <ng-template #editEquipoVisitante>
+            <select
+              [(ngModel)]="partido.equipo_visitante"
+              class="border-2 border-green-600 px-3 py-1 rounded w-full"
+            >
+              <option value="" disabled>Selecciona el equipo visitante</option>
+              <option
+                *ngFor="let equipo of equipos"
+                [ngValue]="equipo.id"
+                [disabled]="
+                  equipo.nombre === partido.nombre_equipo_local ||
+                  equipo.nombre === partido.nombre_equipo_visitante
+                "
+                [ngClass]="{
+                  'text-gray-400':
+                    equipo.nombre === partido.nombre_equipo_local ||
+                    equipo.nombre === partido.nombre_equipo_visitante,
+                  'text-black': !(
+                    equipo.nombre === partido.nombre_equipo_local ||
+                    equipo.nombre === partido.nombre_equipo_visitante
+                  )
+                }"
+              >
+                {{ equipo.nombre }}
+              </option>
+            </select>
+          </ng-template>
+        </td>
+        <td class="px-4 py-2 text-center">
+          <ng-container
+            *ngIf="editandoPartidoId !== partido.id; else editFecha"
+          >
+            {{
+              partido.fecha
+                ? (partido.fecha | date : "dd-MM-yyyy")
+                : "Fecha no establecida"
+            }}
+          </ng-container>
+          <ng-template #editFecha>
+            <input
+              [(ngModel)]="partido.fecha"
+              type="date"
+              class="border-2 border-green-600 px-3 py-1 rounded w-full"
+            />
+          </ng-template>
+        </td>
+        <td class="px-4 py-2 text-center">
+          <ng-container *ngIf="editandoPartidoId !== partido.id; else editHora">
+            {{ partido.hora || "Por determinar" }}
+          </ng-container>
+          <ng-template #editHora>
+            <input
+              [(ngModel)]="partido.hora"
+              class="border-2 border-green-600 px-3 py-1 rounded w-full"
+            />
+          </ng-template>
+        </td>
+        <td class="px-4 py-2 text-center">
+          <ng-container
+            *ngIf="editandoPartidoId !== partido.id; else editResultado"
+          >
+            {{ partido.resultado || "Por jugar" }}
+          </ng-container>
+          <ng-template #editResultado>
+            <input
+              [(ngModel)]="partido.resultado"
+              class="border-2 border-green-600 px-3 py-1 rounded w-full"
+            />
+          </ng-template>
+        </td>
+        <td class="px-4 py-2 text-center">
+          <ng-container *ngIf="editandoPartidoId !== partido.id">
+            <button
+              type="button"
+              (click)="onEditPartido(partido.id)"
+              class="btn btn-sm btn-success cursor-pointer"
+            >
+              ✏️
+            </button>
+          </ng-container>
+          <ng-container *ngIf="editandoPartidoId === partido.id">
+            <button
+              type="button"
+              (click)="onGuardarPartido(partido)"
+              class="btn btn-sm btn-success cursor-pointer"
+            >
+              📝
+            </button>
+          </ng-container>
+          <ng-container *ngIf="editandoPartidoId !== partido.id">
+            <button
+              type="button"
+              (click)="onDeletePartido(partido.id)"
+              class="btn btn-sm btn-danger cursor-pointer"
+            >
+              🗑️
+            </button>
+          </ng-container>
+          <ng-container *ngIf="editandoPartidoId === partido.id">
+            <a
+              (click)="onCancelarEdicionPartido()"
+              class="btn btn-sm btn-warning cursor-pointer"
+              >❌</a
+            >
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

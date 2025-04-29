@@ -1,0 +1,219 @@
+<component-header-admin></component-header-admin>
+
+<a
+  routerLink="../form"
+  class="text-lg font-semibold hover:text-yellow-400 transition"
+  >Crear Equipo</a
+>
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg m-5">
+  <table
+    class="table table-bordered table-striped table-sm text-gray-500 dark:text-gray-400"
+    style="table-layout: fixed"
+  >
+    <thead class="bg-green-800 text-white">
+      <tr>
+        <th scope="col" class="text-center px-4 py-2 text-sm font-semibold">
+          Nombre
+        </th>
+        <th scope="col" class="text-center px-4 py-2 text-sm font-semibold">
+          Escudo
+        </th>
+        <th scope="col" class="text-center px-4 py-2 text-sm font-semibold">
+          Puntos
+        </th>
+        <th scope="col" class="text-center px-4 py-2 text-sm font-semibold">
+          Partidos jugados
+        </th>
+        <th scope="col" class="text-center px-4 py-2 text-sm font-semibold">
+          Partidos ganados
+        </th>
+        <th scope="col" class="text-center px-4 py-2 text-sm font-semibold">
+          Partidos empatados
+        </th>
+        <th scope="col" class="text-center px-4 py-2 text-sm font-semibold">
+          Partidos perdidos
+        </th>
+        <th scope="col" class="text-center px-4 py-2 text-sm font-semibold">
+          Goles a favor
+        </th>
+        <th scope="col" class="text-center px-4 py-2 text-sm font-semibold">
+          Goles en contra
+        </th>
+        <th scope="col" class="text-center px-4 py-2 text-sm font-semibold">
+          Diferencia goles
+        </th>
+        <th scope="col" class="text-center px-4 py-2 text-sm font-semibold">
+          Acciones
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let equipo of equipos; let i = index"
+        [ngClass]="{
+          'bg-green-100': i % 2 === 0,
+          'bg-green-300': i % 2 !== 0
+        }"
+        class="border-b dark:border-gray-700 border-gray-200"
+      >
+        <th
+          scope="row"
+          class="text-center px-4 py-2 font-medium text-gray whitespace-nowrap dark:text-gray"
+        >
+          <ng-container
+            *ngIf="editandoEquipoId !== equipo.id; else editNombreEquipo"
+          >
+            {{ equipo.nombre }}
+          </ng-container>
+          <ng-template #editNombreEquipo>
+            <input
+              [(ngModel)]="equipo.nombre"
+              class="border-2 border-green-600 px-3 py-1 rounded w-full text-center bg-green-50 text-black font-semibold"
+              placeholder="Nombre del equipo"
+            />
+          </ng-template>
+        </th>
+        <td class="text-center px-4 py-2">
+          <ng-container
+            *ngIf="editandoEquipoId !== equipo.id; else editImagenEquipo"
+          >
+            <img
+              src="{{ equipo | escudoPipe }}"
+              class="w-10 h-10 rounded-full border-2 border-green-600"
+            />
+          </ng-container>
+          <ng-template #editImagenEquipo>
+            <input
+              [(ngModel)]="equipo.escudo"
+              class="border-2 border-green-600 px-3 py-1 rounded w-full text-center"
+              placeholder="URL del escudo"
+            />
+          </ng-template>
+        </td>
+        <td class="text-center px-4 py-2">
+          {{ equipo.puntos }}
+        </td>
+        <td class="text-center px-4 py-2">
+          {{ equipo.partidos_jugados }}
+        </td>
+        <td class="text-center px-4 py-2">
+          <ng-container
+            *ngIf="
+              editandoEquipoId !== equipo.id;
+              else editPartidosGanadosEquipo
+            "
+          >
+            {{ equipo.partidos_ganados }}
+          </ng-container>
+          <ng-template #editPartidosGanadosEquipo>
+            <input
+              [(ngModel)]="equipo.partidos_ganados"
+              class="border-2 border-green-600 px-3 py-1 rounded w-full text-center"
+              placeholder="Partidos ganados"
+            />
+          </ng-template>
+        </td>
+        <td class="text-center px-4 py-2">
+          <ng-container
+            *ngIf="
+              editandoEquipoId !== equipo.id;
+              else editPartidosEmpatadosEquipo
+            "
+          >
+            {{ equipo.partidos_empatados }}
+          </ng-container>
+          <ng-template #editPartidosEmpatadosEquipo>
+            <input
+              [(ngModel)]="equipo.partidos_empatados"
+              class="border-2 border-green-600 px-3 py-1 rounded w-full text-center"
+              placeholder="Partidos empatados"
+            />
+          </ng-template>
+        </td>
+        <td class="text-center px-4 py-2">
+          <ng-container
+            *ngIf="
+              editandoEquipoId !== equipo.id;
+              else editPartidosPerdidosEquipo
+            "
+          >
+            {{ equipo.partidos_perdidos }}
+          </ng-container>
+          <ng-template #editPartidosPerdidosEquipo>
+            <input
+              [(ngModel)]="equipo.partidos_perdidos"
+              class="border-2 border-green-600 px-3 py-1 rounded w-full text-center"
+              placeholder="Partidos perdidos"
+            />
+          </ng-template>
+        </td>
+        <td class="text-center px-4 py-2">
+          <ng-container
+            *ngIf="editandoEquipoId !== equipo.id; else editGolesAFavorEquipo"
+          >
+            {{ equipo.goles_a_favor }}
+          </ng-container>
+          <ng-template #editGolesAFavorEquipo>
+            <input
+              [(ngModel)]="equipo.goles_a_favor"
+              class="border-2 border-green-600 px-3 py-1 rounded w-full text-center"
+              placeholder="Goles a favor"
+            />
+          </ng-template>
+        </td>
+        <td class="text-center px-4 py-2">
+          <ng-container
+            *ngIf="editandoEquipoId !== equipo.id; else editGolesEnContraEquipo"
+          >
+            {{ equipo.goles_en_contra }}
+          </ng-container>
+          <ng-template #editGolesEnContraEquipo>
+            <input
+              [(ngModel)]="equipo.goles_en_contra"
+              class="border-2 border-green-600 px-3 py-1 rounded w-full text-center"
+              placeholder="Goles en contra"
+            />
+          </ng-template>
+        </td>
+        <td class="text-center px-4 py-2">{{ equipo.diferencia_goles }}</td>
+        <td class="text-center px-4 py-2 text-center">
+          <ng-container *ngIf="editandoEquipoId !== equipo.id">
+            <button
+              type="button"
+              (click)="onEditEquipo(equipo.id)"
+              class="btn btn-sm btn-success cursor-pointer"
+            >
+              ✏️
+            </button>
+          </ng-container>
+          <ng-container *ngIf="editandoEquipoId === equipo.id">
+            <button
+              type="button"
+              (click)="onGuardarEquipo(equipo)"
+              class="btn btn-sm btn-success cursor-pointer"
+            >
+              📝
+            </button>
+          </ng-container>
+          <ng-container *ngIf="editandoEquipoId !== equipo.id">
+            <button
+              type="button"
+              (click)="onDeleteEquipo(equipo.id)"
+              class="btn btn-sm btn-danger cursor-pointer"
+            >
+              🗑️
+            </button>
+          </ng-container>
+          <ng-container *ngIf="editandoEquipoId === equipo.id">
+            <a
+              (click)="onCancelarEdicionEquipo()"
+              class="btn btn-sm btn-warning cursor-pointer"
+              >❌</a
+            >
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

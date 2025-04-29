@@ -1,0 +1,209 @@
+<component-header-admin></component-header-admin>
+
+<a
+  routerLink="../form"
+  class="text-lg font-semibold hover:text-yellow-400 transition"
+  >Añadir Jugador</a
+>
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg m-5">
+  <table
+    class="table table-bordered table-striped table-sm w-full text-gray-500 dark:text-gray-400"
+    style="table-layout: auto"
+  >
+    <thead class="bg-green-800 text-white">
+      <tr>
+        <th scope="col" class="px-6 py-3 text-sm font-semibold text-center">
+          Nombre
+        </th>
+        <th scope="col" class="px-6 py-3 text-sm font-semibold text-center">
+          Apellidos
+        </th>
+        <th scope="col" class="px-6 py-3 text-sm font-semibold text-center">
+          Imagen
+        </th>
+        <th scope="col" class="px-6 py-3 text-sm font-semibold text-center">
+          Goles
+        </th>
+        <th scope="col" class="px-6 py-3 text-sm font-semibold text-center">
+          Asistencias
+        </th>
+        <th scope="col" class="px-6 py-3 text-sm font-semibold text-center">
+          Dorsal
+        </th>
+        <th scope="col" class="px-6 py-3 text-sm font-semibold text-center">
+          Partidos Jugados
+        </th>
+        <th scope="col" class="px-6 py-3 text-sm font-semibold text-center">
+          Equipo
+        </th>
+        <th scope="col" class="px-6 py-3 text-sm font-semibold text-center">
+          Acciones
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let jugador of jugadores; let i = index"
+        [ngClass]="{
+          'bg-green-100': i % 2 === 0,
+          'bg-green-300': i % 2 !== 0
+        }"
+        class="border-b dark:border-gray-700 border-gray-200"
+      >
+        <th
+          scope="row"
+          class="px-6 py-4 text-center font-medium text-black whitespace-nowrap dark:text-black"
+        >
+          <ng-container
+            *ngIf="editandoJugadorId !== jugador.id; else editNombre"
+          >
+            {{ jugador.nombre }}
+          </ng-container>
+          <ng-template #editNombre>
+            <input
+              [(ngModel)]="jugador.nombre"
+              class="border-2 border-green-600 px-3 py-1 rounded w-full bg-green-50 text-black"
+            />
+          </ng-template>
+        </th>
+        <td class="px-6 py-4 text-center">
+          <ng-container
+            *ngIf="editandoJugadorId !== jugador.id; else editApellidos"
+          >
+            {{ jugador.apellidos }}
+          </ng-container>
+          <ng-template #editApellidos>
+            <input
+              [(ngModel)]="jugador.apellidos"
+              class="border-2 border-green-600 px-3 py-1 rounded w-full bg-green-50"
+            />
+          </ng-template>
+        </td>
+        <td class="px-6 py-4 text-center">
+          <ng-container
+            *ngIf="editandoJugadorId !== jugador.id; else editImagen"
+          >
+            <img
+              [src]="jugador.imagen ? jugador.imagen : 'assets/no-image.jpg'"
+              class="w-10 h-10 rounded-full border-2 border-green-600"
+            />
+          </ng-container>
+          <ng-template #editImagen>
+            <input
+              [(ngModel)]="jugador.imagen"
+              class="border-2 border-green-600 px-3 py-1 rounded w-full"
+            />
+          </ng-template>
+        </td>
+        <td class="px-6 py-4 text-center">
+          <ng-container
+            *ngIf="editandoJugadorId !== jugador.id; else editGoles"
+          >
+            {{ jugador.goles }}
+          </ng-container>
+          <ng-template #editGoles>
+            <input
+              [(ngModel)]="jugador.goles"
+              class="border-2 border-green-600 px-3 py-1 rounded w-full"
+            />
+          </ng-template>
+        </td>
+        <td class="px-6 py-4 text-center">
+          <ng-container
+            *ngIf="editandoJugadorId !== jugador.id; else editAsistencias"
+          >
+            {{ jugador.asistencias }}
+          </ng-container>
+          <ng-template #editAsistencias>
+            <input
+              [(ngModel)]="jugador.asistencias"
+              class="border-2 border-green-600 px-3 py-1 rounded w-full"
+            />
+          </ng-template>
+        </td>
+        <td class="px-6 py-4 text-center">
+          <ng-container
+            *ngIf="editandoJugadorId !== jugador.id; else editDorsal"
+          >
+            {{ jugador.dorsal }}
+          </ng-container>
+          <ng-template #editDorsal>
+            <input
+              [(ngModel)]="jugador.dorsal"
+              class="border-2 border-green-600 px-3 py-1 rounded w-full"
+            />
+          </ng-template>
+        </td>
+        <td class="px-6 py-4 text-center">
+          <ng-container
+            *ngIf="editandoJugadorId !== jugador.id; else editPartidosJugados"
+          >
+            {{ jugador.partidos_jugados }}
+          </ng-container>
+          <ng-template #editPartidosJugados>
+            <input
+              [(ngModel)]="jugador.partidos_jugados"
+              class="border-2 border-green-600 px-3 py-1 rounded w-full"
+            />
+          </ng-template>
+        </td>
+        <td class="px-6 py-4 text-center">
+          <ng-container
+            *ngIf="editandoJugadorId !== jugador.id; else editEquipo"
+          >
+            {{ jugador.nombre_equipo || "Por determinar" }}
+          </ng-container>
+          <ng-template #editEquipo>
+            <select
+              [(ngModel)]="jugador.id_equipo"
+              class="border-2 border-green-600 px-3 py-1 rounded w-full"
+            >
+              <option value="" disabled>Selecciona el equipo</option>
+              <option [ngValue]="null">Sin equipo</option>
+              <option *ngFor="let equipo of equipos" [ngValue]="equipo.id">
+                {{ equipo.nombre }}
+              </option>
+            </select>
+          </ng-template>
+        </td>
+        <td class="px-6 py-4 text-center">
+          <ng-container *ngIf="editandoJugadorId !== jugador.id">
+            <button
+              type="button"
+              (click)="onEditJugador(jugador.id)"
+              class="btn btn-sm btn-success cursor-pointer"
+            >
+              ✏️
+            </button>
+          </ng-container>
+          <ng-container *ngIf="editandoJugadorId === jugador.id">
+            <button
+              type="button"
+              (click)="onGuardarJugador(jugador)"
+              class="btn btn-sm btn-success cursor-pointer"
+            >
+              📝
+            </button>
+          </ng-container>
+          <ng-container *ngIf="editandoJugadorId !== jugador.id">
+            <button
+              type="button"
+              (click)="onDeleteJugador(jugador.id)"
+              class="btn btn-sm btn-danger cursor-pointer"
+            >
+              🗑️
+            </button>
+          </ng-container>
+          <ng-container *ngIf="editandoJugadorId === jugador.id">
+            <a
+              (click)="onCancelarEdicionJugador()"
+              class="btn btn-sm btn-warning cursor-pointer"
+              >❌</a
+            >
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
