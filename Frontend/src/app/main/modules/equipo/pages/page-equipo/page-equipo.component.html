@@ -1,2 +1,57 @@
-<p>page-equipo works!</p>
-{{uuid}}
+<div *ngIf="tipoUsuario === 'admin'; else headerNormal">
+  <component-header-admin></component-header-admin>
+</div>
+
+<ng-template #headerNormal>
+  <component-header></component-header>
+</ng-template>
+
+<div class="m-5 flex">
+  <!-- Sección de la imagen del escudo -->
+  <div class="flex-shrink-0">
+    <img
+      src="{{ equipo | escudoPipe }}"
+      alt="Escudo del equipo"
+      class="h-80 w-80 border border-blue-500 rounded-lg shadow-lg"
+    />
+  </div>
+
+  <!-- Sección de la información del equipo -->
+  <div class="ml-5 text-left">
+    <p class="text-xl font-bold">
+      Nombre: <span class="font-normal">{{ equipo.nombre }}</span>
+    </p>
+    <p class="text-lg">
+      Puntos: <span class="font-semibold">{{ equipo.puntos }}</span>
+    </p>
+    <p class="text-lg">
+      Partidos jugados: <span>{{ equipo.partidos_jugados }}</span>
+    </p>
+    <p class="text-lg">
+      Partidos ganados: <span>{{ equipo.partidos_ganados }}</span>
+    </p>
+    <p class="text-lg">
+      Partidos empatados: <span>{{ equipo.partidos_empatados }}</span>
+    </p>
+    <p class="text-lg">
+      Partidos perdidos: <span>{{ equipo.partidos_perdidos }}</span>
+    </p>
+    <p class="text-lg">
+      Goles a favor: <span>{{ equipo.goles_a_favor }}</span>
+    </p>
+    <p class="text-lg">
+      Goles en contra: <span>{{ equipo.goles_en_contra }}</span>
+    </p>
+    <p class="text-lg">
+      Diferencia de goles: <span>{{ equipo.diferencia_goles }}</span>
+    </p>
+  </div>
+</div>
+
+<div>
+  <ol class="list-decimal list-inside space-y-1 text-gray-800">
+    <li *ngFor="let jugador of jugadores">
+      {{ jugador.apellidos }}, {{ jugador.nombre }}
+    </li>
+  </ol>
+</div>

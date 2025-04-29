@@ -23,11 +23,18 @@ export class MainService {
     )
   }
 
-  getUnEquipo(uuid: string): Observable<Equipo[]>{
+  getUnEquipo(uuid: string): Observable<Equipo>{
     return this.http.get<ApiResponseEquipo>(`${this.baseURL}/equipos/${uuid}`).pipe(
-      map(response => response.data),
+      map(response => response.data[0]),
       catchError(error => throwError(() => new Error('Error al obtener el equipo')))
     );
+  }
+
+  getTeamPlayers(uuid: string): Observable<Jugador[]>{
+    return this.http.get<ApiResponseJugador>(`${this.baseURL}/equipos/${uuid}/jugadores`).pipe(
+      map(response => response.data),
+      catchError(() => of([]))
+    )
   }
 
   newEquipo(equipo: any){ 

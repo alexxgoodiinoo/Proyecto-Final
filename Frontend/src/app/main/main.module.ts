@@ -9,6 +9,7 @@ import { ClasificacionPageComponent } from './pages/clasificacion-page/clasifica
 import { HeaderAdminComponent } from './components/header-admin/header-admin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EscudoPipe } from './pipe/escudo.pipe';
+import { ImagenJugadorPipe } from './pipe/imagen-jugador.pipe';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { EscudoPipe } from './pipe/escudo.pipe';
     HeaderAdminComponent,
     ClasificacionPageComponent,
     EscudoPipe,
+    ImagenJugadorPipe
   ],
   imports: [
     CommonModule,
@@ -26,8 +28,10 @@ import { EscudoPipe } from './pipe/escudo.pipe';
     FormsModule
   ],
   exports: [
+    HeaderComponent,
     HeaderAdminComponent,
     EscudoPipe,
+    ImagenJugadorPipe,
     FormsModule
   ]
 })

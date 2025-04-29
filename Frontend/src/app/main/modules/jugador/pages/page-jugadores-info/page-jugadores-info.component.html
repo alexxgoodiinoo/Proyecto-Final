@@ -1,0 +1,28 @@
+<div *ngIf="tipoUsuario === 'admin'; else headerNormal">
+  <component-header-admin></component-header-admin>
+</div>
+
+<ng-template #headerNormal>
+  <component-header></component-header>
+</ng-template>
+
+<div class="flex flex-wrap justify-center gap-6 p-4">
+  <div
+    *ngFor="let jugador of jugadores"
+    class="w-72 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+  >
+    <img
+      class="w-full h-40 object-cover rounded-t-xl"
+      src="{{ jugador | imagenJugadorPipe }}"
+      alt="Foto del jugador"
+    />
+    <div class="p-5">
+      <h3 class="text-lg font-semibold text-gray-800">
+        {{ jugador.apellidos }}, {{ jugador.nombre }}
+      </h3>
+      <p class="text-gray-600 text-sm mt-2">
+        <strong>Equipo: </strong>{{ jugador.nombre_equipo }}
+      </p>
+    </div>
+  </div>
+</div>
