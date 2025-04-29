@@ -24,7 +24,7 @@ const getOneMatch = async (req, res) => {
   }
   try {
     const match = await partidosService.getOneMatch(matchId);
-    res.send({ status: "OK", data: match });
+    res.send({ status: "OK", data: [match] });
   } catch (error) {
     return res
       .status(error?.status || 500)

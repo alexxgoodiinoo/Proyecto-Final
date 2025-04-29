@@ -26,7 +26,7 @@ const getOnePlayer = async (req, res) => {
     }
     try{
         const player = await jugadoresService.getOnePlayer(playerId);
-        res.send({ status:'OK', data: player });
+        res.send({ status:'OK', data: [player] });
     }catch(error){
         return res
             .status(error?.status || 500)

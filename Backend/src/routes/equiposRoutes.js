@@ -6,6 +6,8 @@ router.get("/", equiposController.getAllTeams);
 
 router.get("/:teamId", equiposController.getOneTeam);
 
+router.get("/:teamId/jugadores", equiposController.getTeamPlayers);
+
 router.post("/", equiposController.createNewTeam);
 
 router.patch("/:teamId", equiposController.updateOneTeam);

@@ -24,6 +24,21 @@ const getOneTeam = async (teamId) => {
   }
 };
 
+const getTeamPlayers = async (teamId) => {
+  try {
+    let players = await DB.getTeamPlayers(teamId);
+    if (!players || players.length === 0) {
+      throw {
+        status: 404,
+        message: `No players found for team with id '${teamId}'`,
+      };
+    }
+    return players;
+  } catch (error) {
+    throw { status: error?.status || 500, message: error?.message || error };
+  }
+};
+
 const createNewTeam = async (newTeam) => {
   try {
     await DB.createNewTeam(newTeam);
@@ -36,7 +51,7 @@ const createNewTeam = async (newTeam) => {
 const updateOneTeam = async (teamId, changes) => {
   try {
     const updateTeam = {
-      ...await DB.getOneTeam(teamId),
+      ...(await DB.getOneTeam(teamId)),
       ...changes,
     };
     await DB.updateOneTeam(updateTeam, teamId);
@@ -47,17 +62,18 @@ const updateOneTeam = async (teamId, changes) => {
 };
 
 const deleteOneTeam = async (teamId) => {
-    try{
-        await DB.deleteOneTeam(teamId);
-    }catch(error){
-        throw { status: error?.status || 500, message: error?.message || error };   
-    }
+  try {
+    await DB.deleteOneTeam(teamId);
+  } catch (error) {
+    throw { status: error?.status || 500, message: error?.message || error };
+  }
 };
 
 module.exports = {
   getAllTeams,
-  createNewTeam,
   getOneTeam,
+  getTeamPlayers,
+  createNewTeam,
   updateOneTeam,
   deleteOneTeam,
 };

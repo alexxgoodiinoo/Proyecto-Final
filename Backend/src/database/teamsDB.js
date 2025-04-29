@@ -25,6 +25,19 @@ async function getOneTeam(teamId) {
   }
 }
 
+const getTeamPlayers = async (teamId) => {
+  try {
+    const respuesta = await cliente.query(
+      'SELECT * FROM public."Jugadores" WHERE id_equipo = $1',
+      [teamId]
+    );
+    return respuesta.rows;
+  } catch (err) {
+    console.error("Error al obtener los jugadores", err);
+    throw err;
+  }
+};
+
 async function createNewTeam(newTeam) {
   try {
     const respuesta = await cliente.query(
@@ -96,6 +109,7 @@ async function deleteOneTeam(teamId) {
 module.exports = {
   getTeams,
   getOneTeam,
+  getTeamPlayers,
   createNewTeam,
   updateOneTeam,
   deleteOneTeam,

@@ -24,11 +24,30 @@ const getOneTeam = async (req, res) => {
   }
   try {
     const team = await equiposService.getOneTeam(teamId);
-    res.send({ status: "OK", data: team });
+    res.send({ status: "OK", data: [team] });
   } catch (error) {
     return res
       .status(error?.status || 500)
       .send({ status: "FAILED", data: { error: error?.message || error } });
+  }
+};
+
+const getTeamPlayers = async (req, res) => {
+  const { teamId } = req.params; 
+  try {
+    const jugadores = await equiposService.getTeamPlayers(teamId);
+    if (jugadores.length === 0) {
+      return res.status(404).send({
+        status: "FAILED",
+        data: { error: `No players found for team with ID '${teamId}'` },
+      });
+    }
+    res.send({ status: "OK", data: jugadores });
+  } catch (error) {
+    res.status(500).send({
+      status: "FAILED",
+      data: { error: error.message || error },
+    });
   }
 };
 
@@ -126,6 +145,7 @@ const deleteOneTeam = async (req, res) => {
 module.exports = {
   getAllTeams,
   getOneTeam,
+  getTeamPlayers,
   createNewTeam,
   updateOneTeam,
   deleteOneTeam,

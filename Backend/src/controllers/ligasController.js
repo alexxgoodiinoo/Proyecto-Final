@@ -25,7 +25,7 @@ const getOneLeague = async (req, res) => {
     }
     try{
         const league = await ligasService.getOneLeague(leagueId);
-        res.send({ status:'OK', data: league });
+        res.send({ status:'OK', data: [league] });
     }catch(error){
         return res
             .status(error?.status || 500)
