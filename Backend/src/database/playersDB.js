@@ -26,7 +26,20 @@ async function getPlayers() {
 async function getOnePlayer(playerId) {
   try {
     const respuesta = await cliente.query(
-      'SELECT * FROM public."Jugadores" WHERE id = $1',
+      `
+      SELECT 
+        j.id,
+        j.nombre,
+        j.apellidos,
+        j.imagen, 
+        j.goles,
+        j.asistencias,
+        j.dorsal,
+        j.partidos_jugados,
+        e.nombre AS nombre_equipo 
+      FROM public."Jugadores" j
+      LEFT JOIN public."Equipos" e ON j.id_equipo = e.id 
+      WHERE j.id = $1`,
       [playerId]
     );
     return respuesta.rows[0];
