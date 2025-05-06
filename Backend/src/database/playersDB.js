@@ -12,6 +12,7 @@ async function getPlayers() {
         j.asistencias,
         j.dorsal,
         j.partidos_jugados,
+        j.id_equipo,
         e.nombre AS nombre_equipo
       FROM public."Jugadores" j
       LEFT JOIN public."Equipos" e ON j.id_equipo = e.id
@@ -36,6 +37,7 @@ async function getOnePlayer(playerId) {
         j.asistencias,
         j.dorsal,
         j.partidos_jugados,
+        j.id_equipo,
         e.nombre AS nombre_equipo 
       FROM public."Jugadores" j
       LEFT JOIN public."Equipos" e ON j.id_equipo = e.id 
