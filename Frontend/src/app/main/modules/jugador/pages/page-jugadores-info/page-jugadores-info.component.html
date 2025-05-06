@@ -6,10 +6,19 @@
   <component-header></component-header>
 </ng-template>
 
+<div class="m-5">
+  <input 
+    type="text"
+    [(ngModel)]="filtroNombre"
+    placeholder="Busca por nombre, apellidos o equipo del jugador"
+    class="border px-4 py-2 rounded w-full mb-4 text-black text-center"
+    >
+</div>
+
 <div class="flex flex-wrap justify-center gap-6 p-4">
   <div
-    *ngFor="let jugador of jugadores"
-    class="w-72 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+    *ngFor="let jugador of jugadoresFiltrados"
+    class="w-72 bg-green-50 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
   >
     <img
       class="w-full h-40 object-cover rounded-t-xl"
@@ -17,11 +26,17 @@
       alt="Foto del jugador"
     />
     <div class="p-5">
-      <h3 class="text-lg font-semibold text-gray-800">
-        {{ jugador.apellidos }}, {{ jugador.nombre }}
-      </h3>
-      <p class="text-gray-600 text-sm mt-2">
-        <strong>Equipo: </strong>{{ jugador.nombre_equipo }}
+      <a href="/main/jugadores/{{ jugador.id }}">
+        <h3 class="text-lg font-semibold text-gray-800">
+          {{ jugador.apellidos }}, {{ jugador.nombre }}
+        </h3>
+      </a>
+      <p class="text-gray-600 text-base mt-2">
+        {{
+          jugador.nombre_equipo
+            ? "Equipo: " + jugador.nombre_equipo
+            : "Sin equipo"
+        }}
       </p>
     </div>
   </div>

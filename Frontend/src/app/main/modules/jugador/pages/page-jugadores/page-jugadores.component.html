@@ -1,1 +1,60 @@
-<p>page-equipos works!</p>
+<div *ngIf="tipoUsuario === 'admin'; else headerNormal">
+  <component-header-admin></component-header-admin>
+</div>
+
+<ng-template #headerNormal>
+  <component-header></component-header>
+</ng-template>
+
+<div class="max-w-5xl mx-auto my-10 p-6 bg-green-200 rounded-xl shadow-xl">
+  <div class="flex flex-col md:flex-row gap-6">
+
+    <div class="flex-shrink-0">
+      <img
+        src="{{ jugador | imagenJugadorPipe }}"
+        alt="Imagen del jugador"
+        class="h-80 w-80 bg-green-100 border border-green-500 rounded-lg shadow-lg"
+      />
+    </div>
+
+    <div
+      class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-center"
+    >
+      <div class="bg-green-100 rounded-lg shadow p-4 flex flex-col justify-center">
+        <h2 class="text-lg font-bold text-gray-800 mb-2">Nombre Completo</h2>
+        <p class="text-lg text-gray-700">{{ jugador.nombre }} {{ jugador.apellidos }}</p>
+      </div>
+
+      <div
+        class="bg-green-100 rounded-lg shadow p-4 flex flex-col justify-center"
+      >
+        <p class="text-lg font-bold text-gray-800 mb-2">Equipo</p>
+        <p class="text-lg text-gray-700">{{ jugador.nombre_equipo ? jugador.nombre_equipo : "Sin equipo"}}</p>
+      </div>
+
+      <div class="bg-green-100 rounded-lg shadow p-4 flex flex-col justify-center">
+        <p class="text-lg font-bold text-gray-800 mb-2">Dorsal</p>
+        <p class="text-lg text-gray-700">{{ jugador.dorsal }}</p>
+      </div>
+
+      <div
+        class="bg-green-100 rounded-lg shadow p-4 flex flex-col justify-center"
+      >
+        <p class="text-lg font-bold text-gray-800 mb-2">Partidos jugados</p>
+        <p class="text-lg text-gray-700">{{ jugador.partidos_jugados }}</p>
+      </div>
+
+      <div class="bg-green-100 rounded-lg shadow p-4 flex flex-col justify-center">
+        <p class="text-lg font-bold text-gray-800 mb-2">Goles</p>
+        <p class="text-lg text-gray-700">{{ jugador.goles }}</p>
+      </div>
+
+      <div
+        class="bg-green-100 rounded-lg shadow p-4 flex flex-col justify-center"
+      >
+        <p class="text-lg font-bold text-gray-800 mb-2">Asistencias</p>
+        <p class="text-lg text-gray-700">{{ jugador.asistencias }}</p>
+      </div>
+    </div>
+  </div>
+</div>

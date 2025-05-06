@@ -6,6 +6,15 @@
   >Añadir Jugador</a
 >
 
+<div class="m-5">
+  <input
+    type="text"
+    [(ngModel)]="filtroNombre"
+    placeholder="Busca por jugador"
+    class="border px-4 py-2 rounded w-full mb-4 text-black text-center"
+  />
+</div>
+
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg m-5">
   <table
     class="table table-bordered table-striped table-sm w-full text-gray-500 dark:text-gray-400"
@@ -44,7 +53,7 @@
     </thead>
     <tbody>
       <tr
-        *ngFor="let jugador of jugadores; let i = index"
+        *ngFor="let jugador of jugadoresFiltrados; let i = index"
         [ngClass]="{
           'bg-green-100': i % 2 === 0,
           'bg-green-300': i % 2 !== 0

@@ -7,42 +7,19 @@
 </ng-template>
 
 <div class="overflow-x-auto shadow-md sm:rounded-lg m-5">
-  <table
-    class="table table-bordered table-striped table-sm w-full text-gray-500 dark:text-gray-400"
-    style="table-layout: fixed"
-  >
+  <table class="min-w-full text-sm text-gray-500 dark:text-gray-400">
     <thead class="bg-green-800 text-white">
       <tr>
-        <th scope="col" class="px-4 py-2 text-sm font-semibold text-left">
-          Posición
-        </th>
-        <th scope="col" class="px-4 py-2 text-sm font-semibold text-left">
-          Equipo
-        </th>
-        <th scope="col" class="px-4 py-2 text-sm font-semibold text-center">
-          Puntos
-        </th>
-        <th scope="col" class="px-4 py-2 text-sm font-semibold text-center">
-          PJ
-        </th>
-        <th scope="col" class="px-4 py-2 text-sm font-semibold text-center">
-          PG
-        </th>
-        <th scope="col" class="px-4 py-2 text-sm font-semibold text-center">
-          PE
-        </th>
-        <th scope="col" class="px-4 py-2 text-sm font-semibold text-center">
-          PP
-        </th>
-        <th scope="col" class="px-4 py-2 text-sm font-semibold text-center">
-          GF
-        </th>
-        <th scope="col" class="px-4 py-2 text-sm font-semibold text-center">
-          GC
-        </th>
-        <th scope="col" class="px-4 py-2 text-sm font-semibold text-center">
-          DG
-        </th>
+        <th class="px-4 py-2 text-left font-semibold">Posición</th>
+        <th class="px-4 py-2 text-left font-semibold">Equipo</th>
+        <th class="px-4 py-2 text-center font-semibold">Puntos</th>
+        <th class="px-4 py-2 text-center font-semibold">PJ</th>
+        <th class="px-4 py-2 text-center font-semibold">PG</th>
+        <th class="px-4 py-2 text-center font-semibold">PE</th>
+        <th class="px-4 py-2 text-center font-semibold">PP</th>
+        <th class="px-4 py-2 text-center font-semibold">GF</th>
+        <th class="px-4 py-2 text-center font-semibold">GC</th>
+        <th class="px-4 py-2 text-center font-semibold">DG</th>
       </tr>
     </thead>
     <tbody *ngFor="let equipo of equipos; let i = index">

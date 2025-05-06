@@ -10,6 +10,7 @@ import { MainService } from '../../../../services/main.service';
 export class PageJugadoresInfoComponent implements OnInit {
   tipoUsuario: string | null = null;
   public jugadores: Jugador[] = [];
+  public filtroNombre: string = '';
 
   constructor(private mainService: MainService) {}
 
@@ -24,5 +25,13 @@ export class PageJugadoresInfoComponent implements OnInit {
     this.mainService
       .getJugadores()
       .subscribe((jugadores) => (this.jugadores = jugadores));
+  }
+
+  get jugadoresFiltrados(): Jugador[] {
+    return this.jugadores.filter((jugador) =>
+      jugador.nombre.toLowerCase().includes(this.filtroNombre.toLowerCase()) ||
+      jugador.apellidos.toLowerCase().includes(this.filtroNombre.toLowerCase()) ||
+      jugador.nombre_equipo?.toLowerCase().includes(this.filtroNombre.toLowerCase())
+    );
   }
 }

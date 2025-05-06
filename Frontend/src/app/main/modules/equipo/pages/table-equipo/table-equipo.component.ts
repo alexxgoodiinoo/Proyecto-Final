@@ -9,6 +9,7 @@ import { MainService } from '../../../../services/main.service';
 })
 export class TableEquipoComponent implements OnInit {
   public equipos: Equipo[] = [];
+  public filtroNombre: string = '';
   editandoEquipoId: string | null = null;
 
   constructor(private mainService: MainService) {}
@@ -21,6 +22,12 @@ export class TableEquipoComponent implements OnInit {
     this.mainService
       .getEquipos()
       .subscribe((equipo) => (this.equipos = equipo));
+  }
+
+  get equiposFiltrados(): Equipo[] {
+    return this.equipos.filter(
+      (equipo) => equipo.nombre.toLowerCase().includes(this.filtroNombre.toLowerCase())
+    );
   }
 
   onEditEquipo(uuid: string) {

@@ -4,6 +4,7 @@ import { TableJugadorComponent } from './pages/table-jugador/table-jugador.compo
 import { FormJugadorComponent } from './components/form-jugador/form-jugador.component';
 import { PageJugadoresInfoComponent } from './pages/page-jugadores-info/page-jugadores-info.component';
 import { AdminGuard } from '../../guards/admin.guard';
+import { PageJugadoresComponent } from './pages/page-jugadores/page-jugadores.component';
 
 const routes: Routes = [
   {
@@ -18,7 +19,11 @@ const routes: Routes = [
   },
   {
     path: 'info',
-    component: PageJugadoresInfoComponent,
+    component: PageJugadoresInfoComponent
+  },
+  {
+    path: ':uuid',
+    component: PageJugadoresComponent
   },
   {
     path: '**',

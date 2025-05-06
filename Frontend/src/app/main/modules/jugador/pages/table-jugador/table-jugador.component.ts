@@ -11,6 +11,8 @@ import { Equipo } from '../../../../interfaces/equipo.interface';
 export class TableJugadorComponent implements OnInit {
   public jugadores: Jugador[] = [];
   public equipos: Equipo[] = [];
+  public filtroNombre: string = '';
+
   editandoJugadorId: string | null = null;
 
   constructor(private mainService: MainService) {}
@@ -26,6 +28,12 @@ export class TableJugadorComponent implements OnInit {
     this.mainService
       .getJugadores()
       .subscribe((jugador) => (this.jugadores = jugador));
+  }
+
+  get jugadoresFiltrados(): Jugador[] {
+    return this.jugadores.filter(
+      (jugador) => jugador.nombre.toLowerCase().includes(this.filtroNombre.toLowerCase())
+    );
   }
 
   onEditJugador(uuid: string) {

@@ -6,52 +6,107 @@
   <component-header></component-header>
 </ng-template>
 
-<div class="m-5 flex">
-  <!-- Sección de la imagen del escudo -->
-  <div class="flex-shrink-0">
-    <img
-      src="{{ equipo | escudoPipe }}"
-      alt="Escudo del equipo"
-      class="h-80 w-80 border border-blue-500 rounded-lg shadow-lg"
-    />
+<div class="max-w-5xl mx-auto my-10 p-6 bg-green-200 rounded-xl shadow-xl">
+  <div class="flex flex-col md:flex-row gap-6">
+    <div class="flex-shrink-0">
+      <img
+        src="{{ equipo | escudoPipe }}"
+        alt="Escudo del equipo"
+        class="h-80 w-80 bg-green-100 border border-green-500 rounded-lg shadow-lg"
+      />
+    </div>
+
+    <div
+      class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-center"
+    >
+      <div
+        class="bg-green-100 rounded-lg shadow p-4 flex flex-col justify-center"
+      >
+        <h2 class="text-lg font-bold text-gray-800 mb-2">Nombre</h2>
+        <p class="text-lg text-gray-700">{{ equipo.nombre }}</p>
+      </div>
+
+      <div
+        class="bg-green-100 rounded-lg shadow p-4 flex flex-col justify-center"
+      >
+        <p class="text-lg font-bold text-gray-800 mb-2">Puntos</p>
+        <p class="text-lg text-gray-700">{{ equipo.puntos }}</p>
+      </div>
+
+      <div
+        class="bg-green-100 rounded-lg shadow p-4 flex flex-col justify-center"
+      >
+        <p class="text-lg font-bold text-gray-800 mb-2">Partidos jugados</p>
+        <p class="text-lg text-gray-700">{{ equipo.partidos_jugados }}</p>
+      </div>
+
+      <div
+        class="bg-green-100 rounded-lg shadow p-4 flex flex-col justify-center"
+      >
+        <p class="text-lg font-bold text-gray-800 mb-2">Partidos ganados</p>
+        <p class="text-lg text-gray-700">{{ equipo.partidos_ganados }}</p>
+      </div>
+
+      <div
+        class="bg-green-100 rounded-lg shadow p-4 flex flex-col justify-center"
+      >
+        <p class="text-lg font-bold text-gray-800 mb-2">Partidos empatados</p>
+        <p class="text-lg text-gray-700">{{ equipo.partidos_empatados }}</p>
+      </div>
+
+      <div
+        class="bg-green-100 rounded-lg shadow p-4 flex flex-col justify-center"
+      >
+        <p class="text-lg font-bold text-gray-800 mb-2">Partidos perdidos</p>
+        <p class="text-lg text-gray-700">{{ equipo.partidos_perdidos }}</p>
+      </div>
+
+      <div
+        class="bg-green-100 rounded-lg shadow p-4 flex flex-col justify-center"
+      >
+        <p class="text-lg font-bold text-gray-800 mb-2">Goles a favor</p>
+        <p class="text-lg text-gray-700">{{ equipo.goles_a_favor }}</p>
+      </div>
+
+      <div
+        class="bg-green-100 rounded-lg shadow p-4 flex flex-col justify-center"
+      >
+        <p class="text-lg font-bold text-gray-800 mb-2">Goles en contra</p>
+        <p class="text-lg text-gray-700">{{ equipo.goles_en_contra }}</p>
+      </div>
+
+      <div
+        class="bg-green-100 rounded-lg shadow p-4 flex flex-col justify-center"
+      >
+        <p class="text-lg font-bold text-gray-800 mb-2">Diferencia de goles</p>
+        <p class="text-lg text-gray-700">{{ equipo.diferencia_goles }}</p>
+      </div>
+    </div>
   </div>
 
-  <!-- Sección de la información del equipo -->
-  <div class="ml-5 text-left">
-    <p class="text-xl font-bold">
-      Nombre: <span class="font-normal">{{ equipo.nombre }}</span>
-    </p>
-    <p class="text-lg">
-      Puntos: <span class="font-semibold">{{ equipo.puntos }}</span>
-    </p>
-    <p class="text-lg">
-      Partidos jugados: <span>{{ equipo.partidos_jugados }}</span>
-    </p>
-    <p class="text-lg">
-      Partidos ganados: <span>{{ equipo.partidos_ganados }}</span>
-    </p>
-    <p class="text-lg">
-      Partidos empatados: <span>{{ equipo.partidos_empatados }}</span>
-    </p>
-    <p class="text-lg">
-      Partidos perdidos: <span>{{ equipo.partidos_perdidos }}</span>
-    </p>
-    <p class="text-lg">
-      Goles a favor: <span>{{ equipo.goles_a_favor }}</span>
-    </p>
-    <p class="text-lg">
-      Goles en contra: <span>{{ equipo.goles_en_contra }}</span>
-    </p>
-    <p class="text-lg">
-      Diferencia de goles: <span>{{ equipo.diferencia_goles }}</span>
-    </p>
+  <div class="mt-8 bg-green-200">
+    <h2 class="text-xl font-bold text-gray-800 mb-6 text-center">Jugadores</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div
+        *ngFor="let jugador of jugadores"
+        class="bg-green-100 rounded-lg shadow-md p-4 flex flex-col items-center"
+      >
+        <a href="/main/jugadores/{{ jugador.id }}">
+          <img
+            [src]="jugador | imagenJugadorPipe"
+            alt="{{ jugador.nombre }} {{ jugador.apellidos }}"
+            class="w-24 h-24 rounded-full border-2 border-green-600 mb-4 object-cover"
+          />
+          <p class="text-lg font-semibold text-gray-800 mb-1">
+            {{ jugador.nombre }} {{ jugador.apellidos }}
+          </p>
+          <div class="text-sm text-gray-600">
+            <p>Partidos jugados: {{ jugador.partidos_jugados }}</p>
+            <p>Goles: {{ jugador.goles }}</p>
+            <p>Asistencias: {{ jugador.asistencias }}</p>
+          </div>
+        </a>
+      </div>
+    </div>
   </div>
-</div>
-
-<div>
-  <ol class="list-decimal list-inside space-y-1 text-gray-800">
-    <li *ngFor="let jugador of jugadores">
-      {{ jugador.apellidos }}, {{ jugador.nombre }}
-    </li>
-  </ol>
 </div>
