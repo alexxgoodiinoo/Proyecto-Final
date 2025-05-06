@@ -53,6 +53,7 @@
               class="border-2 border-green-600 px-3 py-1 rounded w-full"
             >
               <option value="" disabled>Selecciona el equipo local</option>
+              <option [ngValue]="null" class="text-black">Por determinar</option>
               <option
                 *ngFor="let equipo of equipos"
                 [ngValue]="equipo.id"
@@ -87,6 +88,7 @@
               class="border-2 border-green-600 px-3 py-1 rounded w-full"
             >
               <option value="" disabled>Selecciona el equipo visitante</option>
+              <option [ngValue]="null" class="text-black">Por determinar</option>
               <option
                 *ngFor="let equipo of equipos"
                 [ngValue]="equipo.id"

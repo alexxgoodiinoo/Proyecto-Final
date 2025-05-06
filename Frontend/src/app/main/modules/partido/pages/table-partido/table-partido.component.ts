@@ -25,7 +25,10 @@ export class TablePartidoComponent implements OnInit {
   cargarPartidos(){
     this.mainService
       .getPartidos()
-      .subscribe((partido) => (this.partidos = partido));
+      .subscribe((partido) => {
+        (this.partidos = partido)
+        console.log(this.partidos);
+      });
   }
 
   onEditPartido(uuid: string) {

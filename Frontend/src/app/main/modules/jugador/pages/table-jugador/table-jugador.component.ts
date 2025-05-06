@@ -19,20 +19,25 @@ export class TableJugadorComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarJugadores();
-    this.mainService.getEquipos().subscribe(
-      equipos => this.equipos = equipos
-    )
+    this.mainService
+      .getEquipos()
+      .subscribe((equipos) => (this.equipos = equipos));
   }
 
   cargarJugadores() {
     this.mainService
       .getJugadores()
-      .subscribe((jugador) => (this.jugadores = jugador));
+      .subscribe((jugador) => {
+        (this.jugadores = jugador)
+        console.log(this.jugadores);
+      });
   }
 
   get jugadoresFiltrados(): Jugador[] {
-    return this.jugadores.filter(
-      (jugador) => jugador.nombre.toLowerCase().includes(this.filtroNombre.toLowerCase())
+    return this.jugadores.filter((jugador) =>
+      jugador.nombre.toLowerCase().includes(this.filtroNombre.toLowerCase()) ||
+      jugador.apellidos.toLowerCase().includes(this.filtroNombre.toLowerCase()) ||
+      jugador.nombre_equipo?.toLowerCase().includes(this.filtroNombre.toLowerCase())
     );
   }
 

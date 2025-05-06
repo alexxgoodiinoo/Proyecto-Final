@@ -5,7 +5,7 @@ export interface ApiResponsePartido {
 
 export interface Partido {
     id:               string;
-    fecha:            Date;
+    fecha:            string;
     resultado:        string;
     equipo_local:     null | string;
     equipo_visitante:     null | string;

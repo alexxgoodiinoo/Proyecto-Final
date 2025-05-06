@@ -12,6 +12,6 @@ export interface Jugador {
     asistencias:      number;
     dorsal:           number;
     partidos_jugados: number;
-    id_equipo:        null | string;
-    nombre_equipo:    null | string;
+    id_equipo:        string | null;
+    nombre_equipo:    string | null;
 }
