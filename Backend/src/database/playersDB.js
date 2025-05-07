@@ -12,6 +12,7 @@ async function getPlayers() {
         j.asistencias,
         j.dorsal,
         j.partidos_jugados,
+        j.posicion,
         j.id_equipo,
         e.nombre AS nombre_equipo
       FROM public."Jugadores" j
@@ -37,6 +38,7 @@ async function getOnePlayer(playerId) {
         j.asistencias,
         j.dorsal,
         j.partidos_jugados,
+        j.posicion,
         j.id_equipo,
         e.nombre AS nombre_equipo 
       FROM public."Jugadores" j
