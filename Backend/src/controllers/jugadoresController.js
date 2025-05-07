@@ -75,7 +75,9 @@ const createNewPlayer = async (req, res) => {
     const newPlayer = {
         nombre: body.nombre,
         apellidos: body.apellidos,
+        imagen: body.imagen,
         dorsal: body.dorsal,
+        posicion: body.posicion,
         id_equipo: id_equipo,
     };
     try{

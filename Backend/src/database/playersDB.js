@@ -56,7 +56,7 @@ async function getOnePlayer(playerId) {
 async function createNewPlayer(newPlayer) {
   try {
     const respuesta = await cliente.query(
-      'INSERT INTO public."Jugadores"(id, nombre, apellidos, imagen, dorsal, id_equipo) VALUES ($1, $2, $3, $4, $5, $6)',
+      'INSERT INTO public."Jugadores"(id, nombre, apellidos, imagen, dorsal, id_equipo, posicion) VALUES ($1, $2, $3, $4, $5, $6, $7)',
       [
         newPlayer.id,
         newPlayer.nombre,
@@ -64,6 +64,7 @@ async function createNewPlayer(newPlayer) {
         newPlayer.imagen,
         newPlayer.dorsal,
         newPlayer.id_equipo,
+        newPlayer.posicion,
       ]
     );
 
@@ -77,7 +78,7 @@ async function createNewPlayer(newPlayer) {
 async function updateOnePlayer(updatePlayer, playerId) {
   try {
     const respuesta = await cliente.query(
-      'UPDATE public."Jugadores" SET nombre = $1, apellidos = $2, imagen = $3, goles = $4, asistencias = $5, dorsal = $6, partidos_jugados = $7, id_equipo = $8 WHERE id = $9',
+      'UPDATE public."Jugadores" SET nombre = $1, apellidos = $2, imagen = $3, goles = $4, asistencias = $5, dorsal = $6, partidos_jugados = $7, id_equipo = $8, posicion = $9 WHERE id = $10',
       [
         updatePlayer.nombre,
         updatePlayer.apellidos,
@@ -87,6 +88,7 @@ async function updateOnePlayer(updatePlayer, playerId) {
         updatePlayer.dorsal,
         updatePlayer.partidos_jugados,
         updatePlayer.id_equipo,
+        updatePlayer.posicion,
         playerId,
       ]
     );
