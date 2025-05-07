@@ -10,7 +10,7 @@
   <input
     type="text"
     [(ngModel)]="filtroNombre"
-    placeholder="Busca por nombre, apellidos o equipo del jugador"
+    placeholder="Busca por nombre, apellidos, posicion o equipo del jugador"
     class="border px-4 py-2 rounded w-full mb-4 text-black text-center"
   />
 </div>
@@ -42,6 +42,9 @@
         </th>
         <th scope="col" class="px-6 py-3 text-sm font-semibold text-center">
           Partidos Jugados
+        </th>
+        <th scope="col" class="px-6 py-3 text-sm font-semibold text-center">
+          Posición
         </th>
         <th scope="col" class="px-6 py-3 text-sm font-semibold text-center">
           Equipo
@@ -155,6 +158,25 @@
               [(ngModel)]="jugador.partidos_jugados"
               class="border-2 border-green-600 px-3 py-1 rounded w-full"
             />
+          </ng-template>
+        </td>
+        <td class="px-6 py-4 text-center">
+          <ng-container
+            *ngIf="editandoJugadorId !== jugador.id; else editPosicion"
+          >
+            {{ jugador.posicion }}
+          </ng-container>
+          <ng-template #editPosicion>
+            <select
+              [(ngModel)]="jugador.posicion"
+              class="border-2 border-green-600 px-3 py-1 rounded w-full"
+            >
+              <option value="" disabled>Selecciona la posición</option>
+              <option value="PT">Portero</option>
+              <option value="DF">Defensa</option>
+              <option value="MC">Mediocentro</option>
+              <option value="DL">Delantero</option>
+            </select>
           </ng-template>
         </td>
         <td class="px-6 py-4 text-center">

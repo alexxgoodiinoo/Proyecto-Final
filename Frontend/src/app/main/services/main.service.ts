@@ -75,6 +75,7 @@ export class MainService {
   }
 
   newJugador(jugador: any) {
+    console.log(jugador);
     return this.http.post(`${this.baseURL}/jugadores/`, jugador);
   }
 

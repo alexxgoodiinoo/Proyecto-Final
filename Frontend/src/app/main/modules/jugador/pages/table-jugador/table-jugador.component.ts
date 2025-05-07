@@ -27,17 +27,24 @@ export class TableJugadorComponent implements OnInit {
   cargarJugadores() {
     this.mainService
       .getJugadores()
-      .subscribe((jugador) => {
-        (this.jugadores = jugador)
-        console.log(this.jugadores);
-      });
+      .subscribe((jugador) => (this.jugadores = jugador));
   }
 
   get jugadoresFiltrados(): Jugador[] {
-    return this.jugadores.filter((jugador) =>
-      jugador.nombre.toLowerCase().includes(this.filtroNombre.toLowerCase()) ||
-      jugador.apellidos.toLowerCase().includes(this.filtroNombre.toLowerCase()) ||
-      jugador.nombre_equipo?.toLowerCase().includes(this.filtroNombre.toLowerCase())
+    return this.jugadores.filter(
+      (jugador) =>
+        jugador.nombre
+          .toLowerCase()
+          .includes(this.filtroNombre.toLowerCase()) ||
+        jugador.apellidos
+          .toLowerCase()
+          .includes(this.filtroNombre.toLowerCase()) ||
+        jugador.posicion
+          ?.toLowerCase()
+          .includes(this.filtroNombre.toLowerCase()) ||
+        jugador.nombre_equipo
+          ?.toLowerCase()
+          .includes(this.filtroNombre.toLowerCase())
     );
   }
 

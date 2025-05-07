@@ -35,6 +35,7 @@ export class FormJugadorComponent {
         [Validators.required, Validators.pattern(/^[1-9][0-9]?$|^99$/)],
       ],
       imagen: [''],
+      posicion: [''],
       id_equipo: [''],
     });
   }

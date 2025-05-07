@@ -7,12 +7,12 @@
 </ng-template>
 
 <div class="m-5">
-  <input 
+  <input
     type="text"
     [(ngModel)]="filtroNombre"
     placeholder="Busca por nombre, apellidos o equipo del jugador"
     class="border px-4 py-2 rounded w-full mb-4 text-black text-center"
-    >
+  />
 </div>
 
 <div class="flex flex-wrap justify-center gap-6 p-4">
@@ -37,6 +37,9 @@
             ? "Equipo: " + jugador.nombre_equipo
             : "Sin equipo"
         }}
+      </p>
+      <p class="text-gray-600 text-base mt-2">
+        Posición: {{ jugador.posicion }}
       </p>
     </div>
   </div>

@@ -16,7 +16,7 @@
     <ul class="mt-4 space-y-2">
       <li
         *ngFor="let equipo of equipos | slice : 0 : 9; let i = index"
-        class="bg-gradient-to-r from-green-500 via-green-400 to-green-300 border-2 border-green-400 p-2 rounded-md shadow-md text-white hover:scale-105 transition-transform"
+        class="bg-gradient-to-r from-green-600 via-green-400 to-green-300 border-2 border-green-400 p-2 rounded-md shadow-md text-white hover:scale-105 transition-transform"
       >
         {{ i + 1 }}.- {{ equipo.nombre }} - {{ equipo.puntos }} pts
       </li>
