@@ -3,6 +3,7 @@ import { Equipo } from '../../interfaces/equipo.interface';
 import { MainService } from '../../services/main.service';
 import { Partido } from '../../interfaces/partido.interface';
 import { Jugador } from '../../interfaces/jugador.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-page',
@@ -19,7 +20,7 @@ export class MainPageComponent implements OnInit {
   public maxGoleadores: Jugador[] = [];
   public maxAsistentes: Jugador[] = [];
 
-  constructor(private mainService: MainService) {}
+  constructor(private mainService: MainService, private router: Router) {}
 
   ngOnInit(): void {
     const token = localStorage.getItem('token');
@@ -40,14 +41,24 @@ export class MainPageComponent implements OnInit {
     this.mainService.getJugadores().subscribe((jugador) => {
       this.jugadores = jugador;
       this.ordenarJugadores();
+      console.log(this.maxGoleadores);
+      console.log(this.maxAsistentes);
     });
   }
 
   ordenarJugadores(){
-    this.maxGoleadores = this.jugadores
+    this.maxGoleadores = [...this.jugadores]
       .sort((a,b) => b.goles - a.goles);
 
-    this.maxAsistentes = this.jugadores
+    this.maxAsistentes = [...this.jugadores]
       .sort((a,b) => b.asistencias - a.asistencias);
+  }
+
+  verClasificacionCompleta(){
+    this.router.navigate(['/main/clasificacion'])
+  }
+
+  verTablonPartidos(){
+    this.router.navigate(['/main/partidos/info'])
   }
 }

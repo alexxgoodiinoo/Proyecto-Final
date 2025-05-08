@@ -9,6 +9,7 @@ import { Equipo } from '../../../../interfaces/equipo.interface';
   templateUrl: './table-partido.component.html',
 })
 export class TablePartidoComponent implements OnInit {
+  public filtroNombre: string = '';
   public partidos: Partido[] = [];
   public equipos: Equipo[] = [];
   editandoPartidoId: string | null = null;
@@ -22,13 +23,23 @@ export class TablePartidoComponent implements OnInit {
       .subscribe((equipo) => (this.equipos = equipo));
   }
 
-  cargarPartidos(){
-    this.mainService
-      .getPartidos()
-      .subscribe((partido) => {
-        (this.partidos = partido)
-        console.log(this.partidos);
-      });
+  get partidosFiltrados(): Partido[] {
+      return this.partidos.filter(
+        (partido) =>
+          partido.nombre_equipo_local!
+            .toLowerCase()
+            .includes(this.filtroNombre.toLowerCase()) ||
+          partido.nombre_equipo_visitante!
+            .toLowerCase()
+            .includes(this.filtroNombre.toLowerCase())
+      );
+    }
+
+  cargarPartidos() {
+    this.mainService.getPartidos().subscribe((partido) => {
+      this.partidos = partido;
+      console.log(this.partidos);
+    });
   }
 
   onEditPartido(uuid: string) {

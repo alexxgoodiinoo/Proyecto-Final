@@ -4,12 +4,14 @@ export interface ApiResponsePartido {
 }
 
 export interface Partido {
-    id:               string;
-    fecha:            string;
-    resultado:        string;
-    equipo_local:     null | string;
-    equipo_visitante:     null | string;
-    nombre_equipo_local:     null | string;
-    nombre_equipo_visitante: null | string;
-    hora:             string;
+    id:                      string;
+    fecha:                   string | null;
+    resultado:               string | null;
+    equipo_local:            string | null;
+    equipo_visitante:        string | null;
+    nombre_equipo_local:     string | null;
+    escudo_equipo_local:     string | null;
+    nombre_equipo_visitante: string | null;
+    escudo_equipo_visitante: string | null;
+    hora:                    string | null;
 }

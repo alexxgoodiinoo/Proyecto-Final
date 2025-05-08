@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Jugador } from '../../../../interfaces/jugador.interface';
 import { MainService } from '../../../../services/main.service';
 import { Equipo } from '../../../../interfaces/equipo.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-table-jugador',
@@ -15,7 +16,7 @@ export class TableJugadorComponent implements OnInit {
 
   editandoJugadorId: string | null = null;
 
-  constructor(private mainService: MainService) {}
+  constructor(private mainService: MainService, private router: Router) {}
 
   ngOnInit(): void {
     this.cargarJugadores();
@@ -80,5 +81,14 @@ export class TableJugadorComponent implements OnInit {
         console.log('Error al eliminar jugador ', err);
       },
     });
+  }
+
+  detalleJugador(uuid: string) {
+    this.router.navigate(['/main/jugadores', uuid]);
+  }
+
+  detalleEquipo(nombre_equipo: string | null) {
+    let equipoUUID = this.equipos.filter((e) => e.nombre == nombre_equipo);
+    this.router.navigate(['/main/equipos', equipoUUID[0].id]);
   }
 }

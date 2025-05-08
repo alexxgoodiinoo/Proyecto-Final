@@ -1,0 +1,68 @@
+<div *ngIf="tipoUsuario === 'admin'; else headerNormal">
+  <component-header-admin></component-header-admin>
+</div>
+
+<ng-template #headerNormal>
+  <component-header></component-header>
+</ng-template>
+
+<div class="m-5">
+  <input
+    type="text"
+    [(ngModel)]="filtroNombre"
+    placeholder="Busca por equipo"
+    class="border px-4 py-2 rounded w-full mb-4 text-black text-center"
+  />
+</div>
+
+<div class="flex flex-wrap justify-center gap-6 p-4">
+  <div
+    *ngFor="let partido of partidosFiltrados"
+    class="w-full max-w-xl bg-green-50 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-4"
+  >
+    <a href="/main/partidos/{{ partido.id }}">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center w-1/3 gap-2">
+          <img
+            class="w-20 h-20 object-cover rounded-full"
+            [src]="partido.escudo_equipo_local"
+            alt="Escudo del equipo local"
+            (error)="cargarImagenPorDefecto($event)"
+          />
+          <p class="text-gray-600 ml-2">
+            {{
+              partido.nombre_equipo_local
+                ? partido.nombre_equipo_local
+                : "Por determinar"
+            }}
+          </p>
+        </div>
+
+        <div class="w-1/3 text-center text-sm">
+          <p class="text-gray-600 text-base mb-1">
+            {{ partido.fecha ? partido.fecha : "Sin establecer" }}
+          </p>
+          VS
+          <p class="text-gray-600 text-base mt-1">
+            {{ partido.hora ? partido.hora : "Sin establecer" }}
+          </p>
+        </div>
+        <div class="flex items-center justify-end w-1/3 gap-2 text-right">
+          <p class="text-gray-600 mr-2">
+            {{
+              partido.nombre_equipo_visitante
+                ? partido.nombre_equipo_visitante
+                : "Por determinar"
+            }}
+          </p>
+          <img
+            class="w-20 h-20 object-cover rounded-full"
+            [src]="partido.escudo_equipo_visitante"
+            alt="Escudo del equipo visitante"
+            (error)="cargarImagenPorDefecto($event)"
+          />
+        </div>
+      </div>
+    </a>
+  </div>
+</div>

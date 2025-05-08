@@ -1,0 +1,38 @@
+<div *ngIf="tipoUsuario === 'admin'; else headerNormal">
+  <component-header-admin></component-header-admin>
+</div>
+
+<ng-template #headerNormal>
+  <component-header></component-header>
+</ng-template>
+
+<div class="m-5">
+  <input
+    type="text"
+    [(ngModel)]="filtroNombre"
+    placeholder="Busca por nombre del equipo"
+    class="border px-4 py-2 rounded w-full mb-4 text-black text-center"
+  />
+</div>
+
+<div class="flex flex-wrap justify-center gap-6 p-4">
+  <div
+    *ngFor="let equipo of equiposFiltrados"
+    class="w-72 bg-green-50 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+  >
+    <a href="/main/equipos/{{ equipo.id }}">
+      <div class="flex justify-center pt-4">
+        <img
+          class="w-40 h-40 object-cover rounded-t-xl"
+          src="{{ equipo | escudoPipe }}"
+          alt="Foto del equipo"
+        />
+      </div>
+      <div class="p-5 text-center">
+        <h3 class="text-lg font-semibold text-gray-800">
+          {{ equipo.nombre }}
+        </h3>
+      </div>
+    </a>
+  </div>
+</div>

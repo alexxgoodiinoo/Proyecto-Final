@@ -8,13 +8,15 @@ import { FormEquipoComponent } from './components/form-equipo/form-equipo.compon
 import { MainModule } from '../../main.module';
 import { RouterModule } from '@angular/router';
 import { PageEquipoComponent } from './pages/page-equipo/page-equipo.component';
+import { PageEquipoInfoComponent } from './pages/page-equipo-info/page-equipo-info.component';
 
 
 @NgModule({
   declarations: [
     TableEquipoComponent,
     FormEquipoComponent,
-    PageEquipoComponent
+    PageEquipoComponent,
+    PageEquipoInfoComponent
   ],
   imports: [
     CommonModule,
