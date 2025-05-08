@@ -11,7 +11,9 @@ async function getMatchs() {
         p.equipo_local,
         p.equipo_visitante,
         el.nombre AS nombre_equipo_local,
-        ev.nombre AS nombre_equipo_visitante
+        el.escudo AS escudo_equipo_local,
+        ev.nombre AS nombre_equipo_visitante,
+        ev.escudo AS escudo_equipo_visitante
       FROM public."Partidos" p
       LEFT JOIN public."Equipos" el ON p.equipo_local = el.id
       LEFT JOIN public."Equipos" ev ON p.equipo_visitante = ev.id
@@ -40,7 +42,9 @@ async function getOneMatch(matchId) {
         p.equipo_local,
         p.equipo_visitante,
         el.nombre AS nombre_equipo_local,
-        ev.nombre AS nombre_equipo_visitante
+        el.escudo AS escudo_equipo_local,
+        ev.nombre AS nombre_equipo_visitante,
+        ev.escudo AS escudo_equipo_visitante
       FROM public."Partidos" p
       LEFT JOIN public."Equipos" el ON p.equipo_local = el.id
       LEFT JOIN public."Equipos" ev ON p.equipo_visitante = ev.id
