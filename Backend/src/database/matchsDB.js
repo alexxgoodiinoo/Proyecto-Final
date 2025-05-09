@@ -48,7 +48,7 @@ async function getOneMatch(matchId) {
       FROM public."Partidos" p
       LEFT JOIN public."Equipos" el ON p.equipo_local = el.id
       LEFT JOIN public."Equipos" ev ON p.equipo_visitante = ev.id
-      WHERE id = $1`,
+      WHERE p.id = $1`,
       [matchId]
     );
 
