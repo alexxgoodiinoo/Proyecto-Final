@@ -1,1 +1,95 @@
-<p>page-partido works!</p>
+<div *ngIf="tipoUsuario === 'admin'; else headerNormal">
+  <component-header-admin></component-header-admin>
+</div>
+
+<ng-template #headerNormal>
+  <component-header></component-header>
+</ng-template>
+
+<div
+  class="relative w-[95%] max-w-7xl mx-auto my-5 h-[500px] rounded-xl overflow-hidden shadow-xl"
+>
+  <div
+    class="absolute inset-0 w-1/2 bg-center bg-cover brightness-50"
+    [ngStyle]="{
+      'background-image':
+        'url(' +
+        (partido.escudo_equipo_local
+          ? partido.escudo_equipo_local
+          : '/escudo-incognita.jpg') +
+        ')'
+    }"
+  ></div>
+
+  <div
+    class="absolute inset-0 left-1/2 w-1/2 bg-center bg-cover brightness-50"
+    [ngStyle]="{
+      'background-image':
+        'url(' +
+        (partido.escudo_equipo_visitante
+          ? partido.escudo_equipo_visitante
+          : '/escudo-incognita.jpg') +
+        ')'
+    }"
+  ></div>
+
+  <div class="relative z-10 flex h-full">
+    <div class="w-1/2 flex items-center justify-center">
+      <div class="flex flex-col items-center">
+        <h2
+          (click)="dirigirAEquipo(partido.equipo_local)"
+          class="cursor-pointer text-2xl md:text-4xl font-bold text-white text-center drop-shadow-lg"
+        >
+          {{
+            partido.nombre_equipo_local
+              ? partido.nombre_equipo_local
+              : "Por determinar"
+          }}
+        </h2>
+        <p
+          class="text-white text-3xl font-bold mt-5 drop-shadow-lg"
+          *ngIf="partido.resultado as resultadoEquipoLocal"
+        >
+          {{ resultadoEquipoLocal.split("-")[0].trim() }}
+        </p>
+      </div>
+    </div>
+
+    <div
+      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-20"
+    >
+      <p class="text-white text-xl md:text-2xl font-semibold drop-shadow-lg">
+        {{ partido.fecha ? partido.fecha : "Sin establecer" }}
+      </p>
+      <p
+        class="text-white text-xl md:text-2xl font-semibold drop-shadow-lg mt-5 mb-5"
+      >
+        VS
+      </p>
+      <p class="text-white text-xl md:text-2xl font-semibold drop-shadow-lg">
+        {{ partido.hora ? partido.hora : "Sin establecer" }}
+      </p>
+    </div>
+
+    <div class="w-1/2 flex items-center justify-center">
+      <div class="flex flex-col items-center">
+        <h2
+          (click)="dirigirAEquipo(partido.equipo_visitante)"
+          class="cursor-pointer text-2xl md:text-4xl font-bold text-white text-center drop-shadow-lg"
+        >
+          {{
+            partido.nombre_equipo_visitante
+              ? partido.nombre_equipo_visitante
+              : "Por determinar"
+          }}
+        </h2>
+        <p
+          class="text-white text-3xl font-bold mt-5 drop-shadow-lg"
+          *ngIf="partido.resultado as resultadoEquipovisitante"
+        >
+          {{ resultadoEquipovisitante.split("-")[1].trim() }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

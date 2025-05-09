@@ -5,6 +5,8 @@ import { FormJugadorComponent } from './components/form-jugador/form-jugador.com
 import { PageJugadoresInfoComponent } from './pages/page-jugadores-info/page-jugadores-info.component';
 import { AdminGuard } from '../../guards/admin.guard';
 import { PageJugadoresComponent } from './pages/page-jugadores/page-jugadores.component';
+import { PageTablaGoleadoresComponent } from './pages/page-tabla-goleadores/page-tabla-goleadores.component';
+import { PageTablaAsistentesComponent } from './pages/page-tabla-asistentes/page-tabla-asistentes.component';
 
 const routes: Routes = [
   {
@@ -16,6 +18,14 @@ const routes: Routes = [
     path: 'form',
     component: FormJugadorComponent,
     canActivate: [AdminGuard],
+  },
+  {
+    path: 'tabla-goleadores',
+    component: PageTablaGoleadoresComponent
+  },
+  {
+    path: 'tabla-asistentes',
+    component: PageTablaAsistentesComponent
   },
   {
     path: 'info',

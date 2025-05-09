@@ -8,13 +8,17 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MainModule } from '../../main.module';
 import { PageJugadoresInfoComponent } from './pages/page-jugadores-info/page-jugadores-info.component';
 import { PageJugadoresComponent } from './pages/page-jugadores/page-jugadores.component';
+import { PageTablaGoleadoresComponent } from './pages/page-tabla-goleadores/page-tabla-goleadores.component';
+import { PageTablaAsistentesComponent } from './pages/page-tabla-asistentes/page-tabla-asistentes.component';
 
 @NgModule({
   declarations: [
     TableJugadorComponent,
     FormJugadorComponent,
     PageJugadoresComponent,
-    PageJugadoresInfoComponent
+    PageJugadoresInfoComponent,
+    PageTablaGoleadoresComponent,
+    PageTablaAsistentesComponent
   ],
   imports: [
     CommonModule,

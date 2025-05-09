@@ -61,4 +61,12 @@ export class MainPageComponent implements OnInit {
   verTablonPartidos(){
     this.router.navigate(['/main/partidos/info'])
   }
+
+  verTablaGoleadores(){
+    this.router.navigate(['/main/jugadores/tabla-goleadores'])
+  }
+
+  verTablaAsistentes(){
+    this.router.navigate(['/main/jugadores/tabla-asistentes'])
+  }
 }

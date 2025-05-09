@@ -95,6 +95,17 @@ export class MainService {
     );
   }
 
+  getUnPartido(uuid: string): Observable<Partido> {
+    return this.http
+      .get<ApiResponsePartido>(`${this.baseURL}/partidos/${uuid}`)
+      .pipe(
+        map((response) => response.data[0]),
+        catchError((error) =>
+          throwError(() => new Error('Error al obtener el partido'))
+        )
+      );
+  }
+
   newPartido(partido: any) {
     return this.http.post(`${this.baseURL}/partidos/`, partido);
   }
