@@ -6,7 +6,7 @@ async function getMatchs() {
       SELECT 
         p.id,
         p.resultado,
-        p.fecha,
+        TO_CHAR(p.fecha, 'YYYY-MM-DD') AS fecha,
         p.hora,
         p.equipo_local,
         p.equipo_visitante,
@@ -19,12 +19,7 @@ async function getMatchs() {
       LEFT JOIN public."Equipos" ev ON p.equipo_visitante = ev.id
     `);
 
-    const partidos = respuesta.rows.map((p) => ({
-      ...p,
-      fecha: p.fecha.toISOString().split("T")[0],
-    }));
-
-    return partidos;
+    return respuesta.rows;
   } catch (err) {
     console.error("Error", err);
     return [];
@@ -33,11 +28,12 @@ async function getMatchs() {
 
 async function getOneMatch(matchId) {
   try {
-    const respuesta = await cliente.query(`
+    const respuesta = await cliente.query(
+      `
       SELECT 
         p.id,
         p.resultado,
-        p.fecha,
+        TO_CHAR(p.fecha, 'YYYY-MM-DD') AS fecha,
         p.hora,
         p.equipo_local,
         p.equipo_visitante,
@@ -52,16 +48,7 @@ async function getOneMatch(matchId) {
       [matchId]
     );
 
-    if (respuesta.rows.length === 0) {
-      return null;
-    }
-
-    const partido = {
-      ...respuesta.rows[0],
-      fecha: respuesta.rows[0].fecha.toISOString().split("T")[0],
-    };
-
-    return partido;
+    return respuesta.rows[0];
   } catch (err) {
     console.error("Error", err);
     return [];
@@ -69,7 +56,10 @@ async function getOneMatch(matchId) {
 }
 
 async function createNewMatch(newMatch) {
-  const fechaSola = newMatch.fecha.split("T")[0] || null;
+  const fechaSola = newMatch.fecha ? new Date(newMatch.fecha) : null;
+  if (fechaSola) {
+    fechaSola.setHours(12, 0, 0, 0);
+  }
 
   try {
     const respuesta = await cliente.query(
@@ -92,7 +82,10 @@ async function createNewMatch(newMatch) {
 }
 
 async function updateOneMatch(updateMatch, matchId) {
-  const fechaSola = updateMatch.fecha.split("T")[0] || null;
+  const fechaSola = updateMatch.fecha ? new Date(updateMatch.fecha) : null;
+  if (fechaSola) {
+    fechaSola.setHours(12, 0, 0, 0);
+  }
 
   try {
     const respuesta = await cliente.query(
