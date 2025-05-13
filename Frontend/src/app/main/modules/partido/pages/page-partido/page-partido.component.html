@@ -59,7 +59,7 @@
       class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-20"
     >
       <p class="text-white text-xl md:text-2xl font-semibold drop-shadow-lg">
-        {{ partido.fecha ? partido.fecha : "Sin establecer" }}
+        {{ partido.fecha ? ( partido.fecha | date:'dd-MM-yyyy') : "Sin establecer" }}
       </p>
       <p
         class="text-white text-xl md:text-2xl font-semibold drop-shadow-lg mt-5 mb-5"

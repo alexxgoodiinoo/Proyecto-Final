@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MainService } from '../../../../services/main.service';
 import { Partido } from '../../../../interfaces/partido.interface';
 import { Equipo } from '../../../../interfaces/equipo.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-table-partido',
@@ -14,7 +15,7 @@ export class TablePartidoComponent implements OnInit {
   public equipos: Equipo[] = [];
   editandoPartidoId: string | null = null;
 
-  constructor(private mainService: MainService) {}
+  constructor(private mainService: MainService, private router: Router) {}
 
   ngOnInit(): void {
     this.cargarPartidos();
@@ -24,22 +25,22 @@ export class TablePartidoComponent implements OnInit {
   }
 
   get partidosFiltrados(): Partido[] {
-      return this.partidos.filter(
-        (partido) =>
-          partido.nombre_equipo_local!
-            .toLowerCase()
-            .includes(this.filtroNombre.toLowerCase()) ||
-          partido.nombre_equipo_visitante!
-            .toLowerCase()
-            .includes(this.filtroNombre.toLowerCase())
-      );
-    }
+    const filtro = this.filtroNombre.toLowerCase().trim();
+
+    return this.partidos.filter((partido) => {
+      if (!filtro) return true;
+      
+      const nombreLocal = partido.nombre_equipo_local?.toLowerCase() || '';
+      const nombreVisitante = partido.nombre_equipo_visitante?.toLowerCase() || '';
+
+      return nombreLocal.includes(filtro) || nombreVisitante.includes(filtro);
+    });
+  }
 
   cargarPartidos() {
-    this.mainService.getPartidos().subscribe((partido) => {
-      this.partidos = partido;
-      console.log(this.partidos);
-    });
+    this.mainService
+      .getPartidos()
+      .subscribe((partido) => (this.partidos = partido));
   }
 
   onEditPartido(uuid: string) {
@@ -48,7 +49,6 @@ export class TablePartidoComponent implements OnInit {
 
   onGuardarPartido(partido: Partido) {
     if (!partido.id) return;
-    console.log(partido);
     this.mainService.updatePartido(partido.id, partido).subscribe({
       next: () => {
         console.log('Partido actualizado con éxito');
@@ -74,5 +74,13 @@ export class TablePartidoComponent implements OnInit {
         console.log('Error al eliminar el partido ', err);
       },
     });
+  }
+
+  detalleEquipoLocal(uuidEquipoLocal: string | null){
+    this.router.navigate(['/main/equipos/', uuidEquipoLocal])
+  }
+
+  detalleEquipoVisitante(uuidEquipoVisitante: string | null){
+    this.router.navigate(['/main/equipos/', uuidEquipoVisitante])
   }
 }

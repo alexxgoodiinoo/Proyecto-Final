@@ -15,6 +15,20 @@
   />
 </div>
 
+<div class="flex justify-center gap-4 mb-4">
+  <button
+    *ngFor="let pos of posiciones"
+    (click)="filtroPosicion = pos.clave"
+    [ngClass]="{
+      'bg-green-600 text-white': filtroPosicion === pos.clave,
+      'bg-green-50 text-black': filtroPosicion !== pos.clave
+    }"
+    class="cursor-pointer px-4 py-2 rounded-full hover:bg-green-400"
+  >
+    {{ pos.label }}
+  </button>
+</div>
+
 <div class="flex flex-wrap justify-center gap-6 p-4">
   <div
     *ngFor="let jugador of jugadoresFiltrados"

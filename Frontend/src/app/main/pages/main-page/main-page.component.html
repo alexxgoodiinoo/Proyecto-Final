@@ -68,7 +68,7 @@
       </h2>
       <div class="mt-4 space-y-2">
         <div
-          *ngFor="let partido of partidos | slice : 0 : 3"
+          *ngFor="let partido of partidos"
           class="bg-gradient-to-r from-green-600 via-green-400 to-green-300 border-2 border-green-400 p-4 rounded-md shadow-md text-white hover:scale-105 transition-transform"
         >
           {{ partido.nombre_equipo_local || "Por determinar" }} vs
@@ -110,7 +110,7 @@
         </h2>
         <p
           class="mt-3 bg-gradient-to-r from-green-600 via-green-400 to-green-300 border-2 border-green-400 p-4 rounded-md shadow-md text-white hover:scale-105 transition-transform"
-          *ngFor="let goleadores of maxGoleadores | slice : 0 : 3"
+          *ngFor="let goleadores of maxGoleadores"
         >
           {{ goleadores.nombre }} - {{ goleadores.goles }} goles
         </p>
@@ -141,7 +141,7 @@
         </h2>
         <p
           class="mt-3 bg-gradient-to-r from-green-600 via-green-400 to-green-300 border-2 border-green-400 p-4 rounded-md shadow-md text-white hover:scale-105 transition-transform"
-          *ngFor="let asistentes of maxAsistentes | slice : 0 : 3"
+          *ngFor="let asistentes of maxAsistentes"
         >
           {{ asistentes.nombre }} - {{ asistentes.asistencias }} asistencias
         </p>

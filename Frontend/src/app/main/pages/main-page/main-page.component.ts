@@ -36,37 +36,57 @@ export class MainPageComponent implements OnInit {
 
     this.mainService
       .getPartidos()
-      .subscribe((partido) => (this.partidos = partido));
+      .subscribe(
+        (partidos) => (this.partidos = this.partidosOrdenados(partidos))
+      );
 
     this.mainService.getJugadores().subscribe((jugador) => {
       this.jugadores = jugador;
       this.ordenarJugadores();
-      console.log(this.maxGoleadores);
-      console.log(this.maxAsistentes);
     });
   }
 
-  ordenarJugadores(){
+  ordenarJugadores() {
     this.maxGoleadores = [...this.jugadores]
-      .sort((a,b) => b.goles - a.goles);
+      .sort((a, b) => b.goles - a.goles)
+      .slice(0, 3);
 
     this.maxAsistentes = [...this.jugadores]
-      .sort((a,b) => b.asistencias - a.asistencias);
+      .sort((a, b) => b.asistencias - a.asistencias)
+      .slice(0, 3);
   }
 
-  verClasificacionCompleta(){
-    this.router.navigate(['/main/clasificacion'])
+  partidosOrdenados(partidos: Partido[]): Partido[] {
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+
+    return partidos
+      .filter((partido) => {
+        if (!partido.fecha) return;
+        const fechaPartido = new Date(partido.fecha);
+        return fechaPartido >= hoy;
+      })
+      .sort((a, b) =>
+        a.fecha && b.fecha
+          ? new Date(a.fecha).getTime() - new Date(b.fecha).getTime()
+          : 0
+      )
+      .slice(0, 3);
   }
 
-  verTablonPartidos(){
-    this.router.navigate(['/main/partidos/info'])
+  verClasificacionCompleta() {
+    this.router.navigate(['/main/clasificacion']);
   }
 
-  verTablaGoleadores(){
-    this.router.navigate(['/main/jugadores/tabla-goleadores'])
+  verTablonPartidos() {
+    this.router.navigate(['/main/partidos/info']);
   }
 
-  verTablaAsistentes(){
-    this.router.navigate(['/main/jugadores/tabla-asistentes'])
+  verTablaGoleadores() {
+    this.router.navigate(['/main/jugadores/tabla-goleadores']);
+  }
+
+  verTablaAsistentes() {
+    this.router.navigate(['/main/jugadores/tabla-asistentes']);
   }
 }

@@ -69,12 +69,17 @@
           <ng-container
             *ngIf="editandoPartidoId !== partido.id; else editEquipoLocal"
           >
-            {{ partido.nombre_equipo_local || "Por determinar" }}
+            <span
+              (click)="detalleEquipoLocal(partido.equipo_local)"
+              class="cursor-pointer hover:underline"
+            >
+              {{ partido.nombre_equipo_local || "Por determinar" }}
+            </span>
           </ng-container>
           <ng-template #editEquipoLocal>
             <select
               [(ngModel)]="partido.equipo_local"
-              class="border-2 border-green-600 px-3 py-1 rounded w-full"
+              class="border-2 border-green-600 px-3 py-1 rounded w-full text-center"
             >
               <option value="" disabled>Selecciona el equipo local</option>
               <option [ngValue]="null" class="text-black">
@@ -106,12 +111,17 @@
           <ng-container
             *ngIf="editandoPartidoId !== partido.id; else editEquipoVisitante"
           >
-            {{ partido.nombre_equipo_visitante || "Por determinar" }}
+            <span
+              (click)="detalleEquipoVisitante(partido.equipo_visitante)"
+              class="cursor-pointer hover:underline"
+            >
+              {{ partido.nombre_equipo_visitante || "Por determinar" }}
+            </span>
           </ng-container>
           <ng-template #editEquipoVisitante>
             <select
               [(ngModel)]="partido.equipo_visitante"
-              class="border-2 border-green-600 px-3 py-1 rounded w-full"
+              class="border-2 border-green-600 px-3 py-1 rounded w-full text-center"
             >
               <option value="" disabled>Selecciona el equipo visitante</option>
               <option [ngValue]="null" class="text-black">
@@ -164,7 +174,8 @@
           <ng-template #editHora>
             <input
               [(ngModel)]="partido.hora"
-              class="border-2 border-green-600 px-3 py-1 rounded w-full"
+              type="time"
+              class="border-2 border-green-600 px-3 py-1 rounded w-2/3"
             />
           </ng-template>
         </td>

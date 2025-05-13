@@ -5,3 +5,56 @@
 <ng-template #headerNormal>
   <component-header></component-header>
 </ng-template>
+
+<div
+  class="max-w-4xl mx-auto bg-green-50 shadow-md rounded-lg overflow-hidden mt-5"
+>
+  <h2 class="text-center text-2xl font-bold text-green-800 py-4">GOLEADORES</h2>
+  <table class="w-full text-left">
+    <thead class="bg-green-200">
+      <tr>
+        <th class="p-3 text-green-800">Jugador</th>
+        <th class="p-3 text-green-800">Goles</th>
+        <th class="p-3 text-green-800">PJ</th>
+        <th class="p-3 text-green-800">Coef.</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let jugador of maxGoleadores" class="border-b">
+        <td class="p-3">
+          <div class="flex items-center gap-3">
+            <img
+              class="w-12 h-12 rounded-full"
+              src="{{ jugador | imagenJugadorPipe }}"
+              alt="imagenJugador"
+            />
+            <div>
+              <a
+                [routerLink]="'/main/jugadores/' + jugador.id"
+                class="cursor-pointer hover:underline font-semibold text-green-600"
+              >
+                {{ jugador.nombre }} {{ jugador.apellidos }}
+              </a>
+              <br />
+              <a
+                [routerLink]="'/main/equipos/' + jugador.id_equipo"
+                class="cursor-pointer text-sm text-green-500 hover:underline"
+              >
+                {{ jugador.nombre_equipo }}
+              </a>
+            </div>
+          </div>
+        </td>
+        <td class="p-3 text-green-600">
+          {{ jugador.goles }}
+        </td>
+        <td class="p-3 text-green-600">
+          {{ jugador.partidos_jugados }}
+        </td>
+        <td class="p-3 text-green-600">
+          {{ (jugador.goles / jugador.partidos_jugados).toFixed(2) }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

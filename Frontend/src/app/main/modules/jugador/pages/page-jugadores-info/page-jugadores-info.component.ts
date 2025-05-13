@@ -11,6 +11,13 @@ export class PageJugadoresInfoComponent implements OnInit {
   tipoUsuario: string | null = null;
   public jugadores: Jugador[] = [];
   public filtroNombre: string = '';
+  posiciones = [
+    { clave: null, label: 'Todos' },
+    { clave: 'PT', label: 'Portero' },
+    { clave: 'DF', label: 'Defensa' },
+    { clave: 'MC', label: 'Mediocentro' },
+    { clave: 'DL', label: 'Delantero' }];
+  filtroPosicion: string | null = null;
 
   constructor(private mainService: MainService) {}
 
@@ -28,10 +35,20 @@ export class PageJugadoresInfoComponent implements OnInit {
   }
 
   get jugadoresFiltrados(): Jugador[] {
-    return this.jugadores.filter((jugador) =>
-      jugador.nombre.toLowerCase().includes(this.filtroNombre.toLowerCase()) ||
-      jugador.apellidos.toLowerCase().includes(this.filtroNombre.toLowerCase()) ||
-      jugador.nombre_equipo?.toLowerCase().includes(this.filtroNombre.toLowerCase())
+    return this.jugadores.filter(
+      (jugador) =>
+        (this.filtroPosicion
+          ? jugador.posicion === this.filtroPosicion
+          : true) &&
+        (jugador.nombre
+          .toLowerCase()
+          .includes(this.filtroNombre.toLowerCase()) ||
+          jugador.apellidos
+            .toLowerCase()
+            .includes(this.filtroNombre.toLowerCase()) ||
+          jugador.nombre_equipo
+            ?.toLowerCase()
+            .includes(this.filtroNombre.toLowerCase()))
     );
   }
 }

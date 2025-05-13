@@ -11,7 +11,7 @@
     <input
       type="text"
       [(ngModel)]="filtroNombre"
-      placeholder="Busca por nombre, apellidos, posicion o equipo del jugador"
+      placeholder="Busca por nombre, apellidos o equipo del jugador"
       class="border px-4 py-2 rounded w-full text-black text-center pr-10"
     />
     <svg
@@ -27,6 +27,20 @@
       ></path>
     </svg>
   </div>
+</div>
+
+<div class="flex justify-center gap-4 mb-4">
+  <button
+    *ngFor="let pos of posiciones"
+    (click)="filtroPosicion = pos.clave"
+    [ngClass]="{
+      'bg-green-600 text-white': filtroPosicion === pos.clave,
+      'bg-green-50 text-black': filtroPosicion !== pos.clave
+    }"
+    class="cursor-pointer px-4 py-2 rounded-full hover:bg-green-400"
+  >
+    {{ pos.label }}
+  </button>
 </div>
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg m-5">
