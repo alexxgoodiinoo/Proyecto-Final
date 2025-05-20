@@ -1,14 +1,14 @@
 <component-header-admin></component-header-admin>
 
 <div
-  class="w-full max-w-md mx-auto flex flex-col mt-10 bg-gradient-to-b from-green-700 to-green-500 p-6 rounded-lg shadow-lg text-white"
+  class="w-full max-w-md mx-auto flex flex-col mt-10 bg-gradient-to-b from-green-600 to-green-400 p-6 rounded-lg shadow-lg text-white"
 >
-  <span class="text-lg mb-4 font-bold text-center uppercase text-green-300">
+  <span class="text-lg mb-4 font-bold text-center uppercase text-green-200">
     Crear Jugador
   </span>
   <form [formGroup]="crearJugadorForm" (ngSubmit)="onCrearJugador()">
     <div class="mb-4">
-      <label for="nombre" class="block text-sm font-medium text-green-300">
+      <label for="nombre" class="block text-sm font-medium text-green-200">
         Nombre
       </label>
       <input
@@ -17,7 +17,7 @@
         type="text"
         placeholder="Nombre del jugador"
         formControlName="nombre"
-        class="placeholder-green-400 w-full px-3 py-2 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 text-black bg-white"
+        class="placeholder-green-600 w-full px-3 py-2 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 text-black bg-white"
       />
       <div
         *ngIf="
@@ -25,14 +25,14 @@
           (crearJugadorForm.get('nombre')?.touched ||
             crearJugadorForm.get('nombre')?.dirty)
         "
-        class="text-red-800 text-sm mt-1"
+        class="text-red-700 text-sm mt-1"
       >
         El nombre es obligatorio
       </div>
     </div>
 
     <div class="mb-4">
-      <label for="apellidos" class="block text-sm font-medium text-green-300">
+      <label for="apellidos" class="block text-sm font-medium text-green-200">
         Apellidos
       </label>
       <input
@@ -41,7 +41,7 @@
         type="text"
         placeholder="Apellidos del jugador"
         formControlName="apellidos"
-        class="placeholder-green-400 w-full px-3 py-2 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 text-black bg-white"
+        class="placeholder-green-600 w-full px-3 py-2 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 text-black bg-white"
       />
       <div
         *ngIf="
@@ -49,14 +49,14 @@
           (crearJugadorForm.get('apellidos')?.touched ||
             crearJugadorForm.get('apellidos')?.dirty)
         "
-        class="text-red-800 text-sm mt-1"
+        class="text-red-700 text-sm mt-1"
       >
         Los apellidos son obligatorios
       </div>
     </div>
 
     <div class="mb-4">
-      <label for="dorsal" class="block text-sm font-medium text-green-300">
+      <label for="dorsal" class="block text-sm font-medium text-green-200">
         Dorsal
       </label>
       <input
@@ -67,14 +67,14 @@
         formControlName="dorsal"
         min="1"
         max="99"
-        class="placeholder-green-400 w-full px-3 py-2 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 text-black bg-white"
+        class="placeholder-green-600 w-full px-3 py-2 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 text-black bg-white"
       />
       <div
         *ngIf="
           crearJugadorForm.get('dorsal')?.touched ||
           crearJugadorForm.get('dorsal')?.dirty
         "
-        class="text-red-800 text-sm mt-1"
+        class="text-red-700 text-sm mt-1"
       >
         <div *ngIf="crearJugadorForm.get('dorsal')?.hasError('required')">
           El dorsal es obligatorio
@@ -86,7 +86,7 @@
     </div>
 
     <div class="mb-4">
-      <label for="imagen" class="block text-sm font-medium text-green-300">
+      <label for="imagen" class="block text-sm font-medium text-green-200">
         Imagen
       </label>
       <input
@@ -94,27 +94,27 @@
         type="text"
         placeholder="Imagen del jugador"
         formControlName="imagen"
-        class="placeholder-green-400 w-full px-3 py-2 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 text-black bg-white"
+        class="placeholder-green-600 w-full px-3 py-2 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 text-black bg-white"
       />
     </div>
 
     <div class="mb-4">
-      <label for="posicion" class="block text-sm font-medium text-green-300">
+      <label for="posicion" class="block text-sm font-medium text-green-200">
         Posicion
       </label>
       <select
         required
         id="posicion"
         formControlName="posicion"
-        class="placeholder-green-400 w-full px-3 py-2 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 text-green-400 bg-white"
+        class="placeholder-green-600 w-full px-3 py-2 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 text-green-600 bg-white"
       >
-        <option class="text-green-400" value="" disabled selected>
+        <option class="text-green-600" value="" disabled selected>
           En que posición juega
         </option>
-        <option class="text-green-400" value="PT">Portero</option>
-        <option class="text-green-400" value="DF">Defensa</option>
-        <option class="text-green-400" value="MC">Mediocentro</option>
-        <option class="text-green-400" value="DL">Delantero</option>
+        <option class="text-green-600" value="PT">Portero</option>
+        <option class="text-green-600" value="DF">Defensa</option>
+        <option class="text-green-600" value="MC">Mediocentro</option>
+        <option class="text-green-600" value="DL">Delantero</option>
       </select>
       <div
         *ngIf="
@@ -122,26 +122,26 @@
           (crearJugadorForm.get('posicion')?.touched ||
             crearJugadorForm.get('posicion')?.dirty)
         "
-        class="text-red-800 text-sm mt-1"
+        class="text-red-700 text-sm mt-1"
       >
         La posicion es obligatoria
       </div>
     </div>
 
     <div class="mb-4">
-      <label for="id_equipo" class="block text-sm font-medium text-green-300">
+      <label for="id_equipo" class="block text-sm font-medium text-green-200">
         Equipo
       </label>
       <select
         id="id_equipo"
         formControlName="id_equipo"
-        class="placeholder-green-400 w-full px-3 py-2 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 text-green-400 bg-white"
+        class="placeholder-green-600 w-full px-3 py-2 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 text-green-600 bg-white"
       >
-        <option class="text-green-400" value="" disabled selected>
+        <option class="text-green-600" value="" disabled selected>
           A qué equipo pertenece
         </option>
         <option
-          class="text-green-400"
+          class="text-green-600"
           *ngFor="let equipo of equipos"
           [value]="equipo.id"
         >
