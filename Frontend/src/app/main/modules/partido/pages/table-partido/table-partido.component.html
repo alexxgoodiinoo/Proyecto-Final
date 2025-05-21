@@ -1,18 +1,20 @@
 <component-header-admin></component-header-admin>
 
-<div class="m-5 flex items-center justify-between">
+<div
+  class="m-5 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0"
+>
   <a
     routerLink="../form"
-    class="text-lg font-semibold hover:text-yellow-200 transition bg-green-600 text-white px-4 py-2 rounded"
+    class="text-lg font-semibold hover:text-yellow-200 transition bg-green-600 text-white px-4 py-2 rounded w-full sm:w-auto text-center"
   >
     Añadir Partido
   </a>
-  <div class="relative w-1/2">
+  <div class="relative w-full sm:w-1/2">
     <input
       type="text"
       [(ngModel)]="filtroNombre"
       placeholder="Busca por equipo local o equipo visitante"
-      class="border px-4 py-2 rounded w-full text-black text-center pr-10"
+      class="border px-4 py-2 rounded w-full text-black text-center pr-10 text-sm sm:text-base"
     />
     <svg
       class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500"
@@ -32,26 +34,44 @@
 <div class="overflow-x-auto shadow-md sm:rounded-lg m-5">
   <table
     class="table table-bordered table-striped table-sm w-full text-gray-500 dark:text-gray-400"
-    style="table-layout: fixed"
+    style="table-layout: fixed; min-width: 600px"
   >
     <thead class="bg-green-800 text-white">
       <tr>
-        <th scope="col" class="px-4 py-2 text-sm font-semibold text-center">
+        <th
+          scope="col"
+          class="px-2 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-center"
+        >
           Local
         </th>
-        <th scope="col" class="px-4 py-2 text-sm font-semibold text-center">
+        <th
+          scope="col"
+          class="px-2 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-center"
+        >
           Visitante
         </th>
-        <th scope="col" class="px-4 py-2 text-sm font-semibold text-center">
+        <th
+          scope="col"
+          class="px-2 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-center"
+        >
           Fecha
         </th>
-        <th scope="col" class="px-4 py-2 text-sm font-semibold text-center">
+        <th
+          scope="col"
+          class="px-2 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-center"
+        >
           Hora
         </th>
-        <th scope="col" class="px-4 py-2 text-sm font-semibold text-center">
+        <th
+          scope="col"
+          class="px-2 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-center"
+        >
           Resultado
         </th>
-        <th scope="col" class="px-4 py-2 text-sm font-semibold text-center">
+        <th
+          scope="col"
+          class="px-2 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-center"
+        >
           Editar
         </th>
       </tr>
@@ -65,7 +85,7 @@
         }"
         class="border-b dark:border-gray-700 border-gray-200"
       >
-        <td class="px-4 py-2 text-center">
+        <td class="px-2 sm:px-4 py-2 text-center text-xs sm:text-base">
           <ng-container
             *ngIf="editandoPartidoId !== partido.id; else editEquipoLocal"
           >
@@ -79,7 +99,7 @@
           <ng-template #editEquipoLocal>
             <select
               [(ngModel)]="partido.equipo_local"
-              class="border-2 border-green-600 px-3 py-1 rounded w-full text-center"
+              class="border-2 border-green-600 px-2 sm:px-3 py-1 rounded w-full text-center text-xs sm:text-base"
             >
               <option value="" disabled>Selecciona el equipo local</option>
               <option [ngValue]="null" class="text-black">
@@ -107,7 +127,7 @@
             </select>
           </ng-template>
         </td>
-        <td class="px-4 py-2 text-center">
+        <td class="px-2 sm:px-4 py-2 text-center text-xs sm:text-base">
           <ng-container
             *ngIf="editandoPartidoId !== partido.id; else editEquipoVisitante"
           >
@@ -121,7 +141,7 @@
           <ng-template #editEquipoVisitante>
             <select
               [(ngModel)]="partido.equipo_visitante"
-              class="border-2 border-green-600 px-3 py-1 rounded w-full text-center"
+              class="border-2 border-green-600 px-2 sm:px-3 py-1 rounded w-full text-center text-xs sm:text-base"
             >
               <option value="" disabled>Selecciona el equipo visitante</option>
               <option [ngValue]="null" class="text-black">
@@ -149,7 +169,7 @@
             </select>
           </ng-template>
         </td>
-        <td class="px-4 py-2 text-center">
+        <td class="px-2 sm:px-4 py-2 text-center text-xs sm:text-base">
           <ng-container
             *ngIf="editandoPartidoId !== partido.id; else editFecha"
           >
@@ -163,11 +183,11 @@
             <input
               [(ngModel)]="partido.fecha"
               type="date"
-              class="border-2 border-green-600 px-3 py-1 rounded w-full"
+              class="border-2 border-green-600 px-2 sm:px-3 py-1 rounded w-full"
             />
           </ng-template>
         </td>
-        <td class="px-4 py-2 text-center">
+        <td class="px-2 sm:px-4 py-2 text-center text-xs sm:text-base">
           <ng-container *ngIf="editandoPartidoId !== partido.id; else editHora">
             {{ partido.hora || "Por determinar" }}
           </ng-container>
@@ -175,11 +195,11 @@
             <input
               [(ngModel)]="partido.hora"
               type="time"
-              class="border-2 border-green-600 px-3 py-1 rounded w-2/3"
+              class="border-2 border-green-600 px-2 sm:px-3 py-1 rounded w-2/3"
             />
           </ng-template>
         </td>
-        <td class="px-4 py-2 text-center">
+        <td class="px-2 sm:px-4 py-2 text-center text-xs sm:text-base">
           <ng-container
             *ngIf="editandoPartidoId !== partido.id; else editResultado"
           >
@@ -188,16 +208,16 @@
           <ng-template #editResultado>
             <input
               [(ngModel)]="partido.resultado"
-              class="border-2 border-green-600 px-3 py-1 rounded w-full"
+              class="border-2 border-green-600 px-2 sm:px-3 py-1 rounded w-full"
             />
           </ng-template>
         </td>
-        <td class="px-4 py-2 text-center">
+        <td class="px-2 sm:px-4 py-2 text-center text-xs sm:text-base">
           <ng-container *ngIf="editandoPartidoId !== partido.id">
             <button
               type="button"
               (click)="onEditPartido(partido.id)"
-              class="btn btn-sm btn-success cursor-pointer"
+              class="btn btn-sm btn-success cursor-pointer text-xs sm:text-base"
             >
               ✏️
             </button>
@@ -206,7 +226,7 @@
             <button
               type="button"
               (click)="onGuardarPartido(partido)"
-              class="btn btn-sm btn-success cursor-pointer"
+              class="btn btn-sm btn-success cursor-pointer text-xs sm:text-base"
             >
               📝
             </button>
@@ -215,7 +235,7 @@
             <button
               type="button"
               (click)="onDeletePartido(partido.id)"
-              class="btn btn-sm btn-danger cursor-pointer"
+              class="btn btn-sm btn-danger cursor-pointer text-xs sm:text-base"
             >
               🗑️
             </button>
@@ -223,7 +243,7 @@
           <ng-container *ngIf="editandoPartidoId === partido.id">
             <a
               (click)="onCancelarEdicionPartido()"
-              class="btn btn-sm btn-warning cursor-pointer"
+              class="btn btn-sm btn-warning cursor-pointer text-xs sm:text-base"
               >❌</a
             >
           </ng-container>

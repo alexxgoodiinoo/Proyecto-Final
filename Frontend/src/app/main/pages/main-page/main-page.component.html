@@ -6,9 +6,9 @@
   <component-header></component-header>
 </ng-template>
 
-<main class="p-8 flex gap-6 text-white font-sans">
+<main class="p-4 md:p-8 flex flex-col lg:flex-row gap-6 text-white font-sans">
   <section
-    class="bg-green-100 text-green-900 p-6 rounded-lg w-1/3 flex-shrink-0 border-4 border-green-400 shadow-lg"
+    class="bg-green-100 text-green-900 p-6 rounded-lg w-full lg:w-1/3 flex-shrink-0 border-4 border-green-400 shadow-lg"
   >
     <h2
       (click)="verClasificacionCompleta()"
@@ -32,7 +32,6 @@
     </h2>
 
     <ul class="mt-4 space-y-2">
-      <!-- El slice es para solo mostrar los 9 primeros equipos -->
       <li
         *ngFor="let equipo of equipos | slice : 0 : 10; let i = index"
         class="bg-gradient-to-r from-green-600 via-green-400 to-green-300 border-2 border-green-400 p-2 rounded-md shadow-md text-white hover:scale-105 transition-transform"
@@ -42,7 +41,7 @@
     </ul>
   </section>
 
-  <div class="flex-1 flex flex-col gap-6">
+  <div class="flex-1 flex flex-col gap-6 w-full">
     <section
       class="bg-green-100 text-green-900 p-6 rounded-lg border-4 border-green-400 shadow-lg"
     >
@@ -84,9 +83,9 @@
       </div>
     </section>
 
-    <div class="flex gap-6">
+    <div class="flex flex-col md:flex-row gap-6">
       <section
-        class="bg-green-100 text-green-900 p-6 rounded-lg w-1/2 border-4 border-green-400 shadow-lg"
+        class="bg-green-100 text-green-900 p-6 rounded-lg w-full md:w-1/2 border-4 border-green-400 shadow-lg"
       >
         <h2
           (click)="verTablaGoleadores()"
@@ -117,7 +116,7 @@
       </section>
 
       <section
-        class="bg-green-100 text-green-900 p-6 rounded-lg w-1/2 border-4 border-green-400 shadow-lg"
+        class="bg-green-100 text-green-900 p-6 rounded-lg w-full md:w-1/2 border-4 border-green-400 shadow-lg"
       >
         <h2
           (click)="verTablaAsistentes()"

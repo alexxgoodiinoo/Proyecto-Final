@@ -15,7 +15,7 @@
   />
 </div>
 
-<div class="flex justify-center gap-4 mb-4">
+<div class="flex flex-wrap justify-center gap-4 mb-4">
   <button
     *ngFor="let tipo of tiposFiltro"
     (click)="filtroTipo = tipo.clave"
@@ -23,7 +23,7 @@
       'bg-green-600 text-white': filtroTipo === tipo.clave,
       'bg-green-50 text-black': filtroTipo !== tipo.clave
     }"
-    class="cursor-pointer px-4 py-2 rounded-full hover:bg-green-400"
+    class="cursor-pointer px-4 py-2 rounded-full hover:bg-green-400 transition"
   >
     {{ tipo.label }}
   </button>
@@ -35,8 +35,10 @@
     class="w-full max-w-xl bg-green-50 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-4"
   >
     <a href="/main/partidos/{{ partido.id }}">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center w-1/3 gap-2">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div
+          class="flex items-center w-full md:w-1/3 gap-2 justify-center md:justify-start text-center md:text-left"
+        >
           <img
             class="w-20 h-20 object-cover rounded-full"
             [src]="partido.escudo_equipo_local"
@@ -52,7 +54,7 @@
           </p>
         </div>
 
-        <div class="w-1/3 text-center text-sm">
+        <div class="w-full md:w-1/3 text-center text-sm">
           <p class="text-gray-600 text-base mb-1">
             {{
               partido.fecha
@@ -65,7 +67,10 @@
             {{ partido.hora ? partido.hora : "Sin establecer" }}
           </p>
         </div>
-        <div class="flex items-center justify-end w-1/3 gap-2 text-right">
+
+        <div
+          class="flex items-center w-full md:w-1/3 gap-2 justify-center md:justify-end text-center md:text-right"
+        >
           <p class="text-gray-600 mr-2">
             {{
               partido.nombre_equipo_visitante
