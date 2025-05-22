@@ -65,7 +65,15 @@
           />
         </svg>
       </h2>
+
       <div class="mt-4 space-y-2">
+        <div
+          *ngIf="partidos.length === 0"
+          class="text-center text-green-600 font-semibold"
+        >
+          No hay próximos partidos programados.
+        </div>
+
         <div
           *ngFor="let partido of partidos"
           class="bg-gradient-to-r from-green-600 via-green-400 to-green-300 border-2 border-green-400 p-4 rounded-md shadow-md text-white hover:scale-105 transition-transform"

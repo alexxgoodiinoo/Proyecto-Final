@@ -1,2 +1,46 @@
-<component-header></component-header>
-<p>entrenador-page works!</p>
+<div *ngIf="tipoUsuario === 'admin'; else headerNormal">
+  <component-header-admin></component-header-admin>
+</div>
+
+<ng-template #headerNormal>
+  <component-header></component-header>
+</ng-template>
+
+<div *ngIf="tipoUsuario === 'manager'">
+  <div *ngIf="equipoUsuario; else noEquipo">
+    <body class="flex justify-center min-h-screen bg-gray-100">
+      <div class="relative w-[500px] h-[550px] mt-5">
+        <img
+          src="campo-futbol.jpg"
+          alt="Campo"
+          class="w-full h-full object-cover"
+        />
+
+        <div
+          *ngFor="let jugador of jugadores"
+          class="absolute text-center"
+          [style.left.%]="jugador.posX"
+          [style.top.%]="jugador.posY"
+          style="transform: translate(-50%, -50%)"
+        >
+          <img
+            [src]="jugador | imagenJugadorPipe"
+            alt="{{ jugador.nombre }}"
+            class="w-12 h-12 rounded-full border-2 border-white mx-auto"
+          />
+          <div
+            class="text-xs text-white bg-black bg-opacity-70 px-1 rounded mt-1"
+          >
+            {{ jugador.nombre }}
+          </div>
+        </div>
+      </div>
+    </body>
+  </div>
+</div>
+
+<ng-template #noEquipo>
+  <p class="text-center text-gray-500 mt-10">
+    No tienes permiso para ver este equipo.
+  </p>
+</ng-template>
