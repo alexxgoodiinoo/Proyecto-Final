@@ -41,11 +41,9 @@ Durante el desarrollo del proyecto me inspiré en varias fuentes para obtener da
 2. Navega al directorio del proyecto
 
 3. Instala las dependencias del frontend:
-   cd frontend
    npm install
 
 4. Instala las dependencias del backend:
-   cd ../backend
    npm install
 
 Asegurate de tener instalado Angular CLI y Node.js.
@@ -53,11 +51,9 @@ Asegurate de tener instalado Angular CLI y Node.js.
 ## 📜 Uso
 
 1. Inicia el backend:
-   cd backend
    npm run dev
 
 2. Inicia el frontend:
-   cd frontend
    ng s -o
 
 3. Accede a la aplicación desde tu navegador en http://localhost:3000.
