@@ -1,0 +1,169 @@
+<component-header-admin></component-header-admin>
+
+<div
+  class="m-5 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0"
+>
+  <div class="relative w-full sm:w-1/2">
+    <input
+      type="text"
+      [(ngModel)]="filtroNombre"
+      placeholder="Busca por username"
+      class="border px-4 py-2 rounded w-full text-black text-center pr-10 text-sm sm:text-base"
+    />
+    <svg
+      class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500"
+      fill="currentColor"
+      viewBox="0 0 20 20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M12.9 14.32a8 8 0 111.414-1.414l4.387 4.387a1 1 0 01-1.414 1.414l-4.387-4.387zM14 8a6 6 0 11-12 0 6 6 0 0112 0z"
+        clip-rule="evenodd"
+      ></path>
+    </svg>
+  </div>
+</div>
+
+<div class="overflow-x-auto shadow-md sm:rounded-lg m-5">
+  <table
+    class="table table-bordered table-striped table-sm w-full text-gray-500 dark:text-gray-400"
+    style="table-layout: fixed; min-width: 600px"
+  >
+    <thead class="bg-green-800 text-white">
+      <tr>
+        <th
+          scope="col"
+          class="px-2 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-center"
+        >
+          Username
+        </th>
+        <th
+          scope="col"
+          class="px-2 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-center"
+        >
+          Email
+        </th>
+        <th
+          scope="col"
+          class="px-2 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-center"
+        >
+          Tipo usuario
+        </th>
+        <th
+          scope="col"
+          class="px-2 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-center"
+        >
+          Equipo
+        </th>
+        <th
+          scope="col"
+          class="px-2 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-center"
+        >
+          Acciones
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let usuario of usuariosFiltrados; let i = index"
+        [ngClass]="{
+          'bg-green-100': i % 2 === 0,
+          'bg-green-300': i % 2 !== 0
+        }"
+        class="border-b dark:border-gray-700 border-gray-200"
+      >
+        <td class="px-2 sm:px-4 py-2 text-center text-xs sm:text-base">
+          <ng-container
+            *ngIf="editandoUsuarioId !== usuario.id; else editUsername"
+          >
+            {{ usuario.username }}
+          </ng-container>
+          <ng-template #editUsername>
+            <input
+              [(ngModel)]="usuario.username"
+              type="text"
+              class="border-2 border-green-600 px-2 sm:px-3 py-1 rounded w-full"
+            />
+          </ng-template>
+        </td>
+        <td class="px-2 sm:px-4 py-2 text-center text-xs sm:text-base">
+          <ng-container
+            *ngIf="editandoUsuarioId !== usuario.id; else editEmail"
+          >
+            {{ usuario.email }}
+          </ng-container>
+          <ng-template #editEmail>
+            <input
+              [(ngModel)]="usuario.email"
+              type="email"
+              class="border-2 border-green-600 px-2 sm:px-3 py-1 rounded w-2/3"
+            />
+          </ng-template>
+        </td>
+        <td class="px-2 sm:px-4 py-2 text-center text-xs sm:text-base">
+          <ng-container
+            *ngIf="editandoUsuarioId !== usuario.id; else editTipoUsuario"
+          >
+            {{ usuario.tipo_usuario }}
+          </ng-container>
+          <ng-template #editTipoUsuario>
+            <input
+              [(ngModel)]="usuario.tipo_usuario"
+              class="border-2 border-green-600 px-2 sm:px-3 py-1 rounded w-full"
+            />
+          </ng-template>
+        </td>
+        <td class="px-2 sm:px-4 py-2 text-center text-xs sm:text-base">
+          <ng-container
+            *ngIf="editandoUsuarioId !== usuario.id; else editEquipo"
+          >
+            {{ usuario.nombre_equipo || "Sin equipo" }}
+          </ng-container>
+          <ng-template #editEquipo>
+            <input
+              [(ngModel)]="usuario.id_equipo"
+              class="border-2 border-green-600 px-2 sm:px-3 py-1 rounded w-full"
+            />
+          </ng-template>
+        </td>
+        <td class="px-2 sm:px-4 py-2 text-center text-xs sm:text-base">
+          <ng-container *ngIf="editandoUsuarioId !== usuario.id">
+            <button
+              type="button"
+              (click)="onEditUsuario(usuario.id)"
+              class="btn btn-sm btn-success cursor-pointer text-xs sm:text-base"
+            >
+              ✏️
+            </button>
+          </ng-container>
+          <ng-container *ngIf="editandoUsuarioId === usuario.id">
+            <button
+              type="button"
+              (click)="onGuardarUsuario(usuario)"
+              class="btn btn-sm btn-success cursor-pointer text-xs sm:text-base"
+            >
+              📝
+            </button>
+          </ng-container>
+          <ng-container *ngIf="editandoUsuarioId !== usuario.id">
+            <button
+              type="button"
+              (click)="onDeleteUsuario(usuario.id)"
+              class="btn btn-sm btn-danger cursor-pointer text-xs sm:text-base"
+            >
+              🗑️
+            </button>
+          </ng-container>
+          <ng-container *ngIf="editandoUsuarioId === usuario.id">
+            <a
+              (click)="onCancelarEdicionUsuario()"
+              class="btn btn-sm btn-warning cursor-pointer text-xs sm:text-base"
+              >❌</a
+            >
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

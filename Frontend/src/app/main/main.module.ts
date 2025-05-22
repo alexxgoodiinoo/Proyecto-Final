@@ -10,6 +10,7 @@ import { HeaderAdminComponent } from './components/header-admin/header-admin.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EscudoPipe } from './pipe/escudo.pipe';
 import { ImagenJugadorPipe } from './pipe/imagen-jugador.pipe';
+import { TableUsuariosComponent } from './modules/usuarios/pages/table-usuarios/table-usuarios.component';
 
 @NgModule({
   declarations: [

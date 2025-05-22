@@ -5,6 +5,7 @@ import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { ApiResponseEquipo, Equipo } from '../interfaces/equipo.interface';
 import { ApiResponsePartido, Partido } from '../interfaces/partido.interface';
 import { ApiResponseJugador, Jugador } from '../interfaces/jugador.interface';
+import { ApiResponseUsuario, Usuario } from '../interfaces/usuario.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -80,6 +81,7 @@ export class MainService {
   }
 
   updateJugador(uuid: string, jugador: any) {
+    console.log(jugador);
     return this.http.patch(`${this.baseURL}/jugadores/${uuid}`, jugador);
   }
 
@@ -116,5 +118,21 @@ export class MainService {
 
   deletePartido(uuid: string) {
     return this.http.delete(`${this.baseURL}/partidos/${uuid}`);
+  }
+
+  //Usuarios
+  getUsuarios(): Observable<Usuario[]> {
+    return this.http.get<ApiResponseUsuario>(`${this.baseURL}/usuarios`).pipe(
+      map((response) => response.data),
+      catchError(() => of([]))
+    );
+  }
+
+  updateUsuario(uuid: string, usuario: any) {
+    return this.http.patch(`${this.baseURL}/usuarios/${uuid}`, usuario);
+  }
+
+  deleteUsuario(uuid: string) {
+    return this.http.delete(`${this.baseURL}/usuarios/${uuid}`);
   }
 }

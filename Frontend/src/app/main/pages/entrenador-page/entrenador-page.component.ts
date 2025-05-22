@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MainService } from '../../services/main.service';
-import { Router } from '@angular/router';
 import { Jugador } from '../../interfaces/jugador.interface';
-import { Equipo } from '../../interfaces/equipo.interface';
 
-type JugadorConPos = Jugador & {
+interface PosicionCampo {
+  id: string;
   posX: number;
   posY: number;
-};
+  jugador?: Jugador;
+  posicion: string;
+}
 
 @Component({
   selector: 'app-entrenador-page',
@@ -16,72 +17,139 @@ type JugadorConPos = Jugador & {
   styles: ``,
 })
 export class EntrenadorPageComponent implements OnInit {
-  constructor(private mainService: MainService) {}
-
   tipoUsuario: string | null = null;
+  equipoUsuario: boolean = false;
   idEquipo: string | null = null;
 
-  jugadores: JugadorConPos[] = [];
-  equipos: Equipo[] = [];
+  jugadores: PosicionCampo[] = [];
+  jugadoresSuplentes: Jugador[] = [];
+  jugadoresCompatibles: Jugador[] = [];
 
-  equipoUsuario: Equipo | null = null;
+  posicionSeleccionada: { linea: string; id: string } | null = null;
+
+  constructor(private mainService: MainService) {}
 
   ngOnInit(): void {
     const token = localStorage.getItem('token');
+
     if (token) {
       const user = JSON.parse(token);
       this.tipoUsuario = user.data.tipo_usuario;
-      this.idEquipo = user.data.id_equipo;
+      this.equipoUsuario = user.data.id_equipo;
     }
 
+    this.cargarUsuario();
     this.mainService.getEquipos().subscribe((equipos) => {
-      this.equipos = equipos;
-      this.equipoUsuario =
-        this.equipos.find((e) => e.id.toString() === this.idEquipo) || null;
-
-      if (this.equipoUsuario) {
-        this.mainService.getJugadores().subscribe({
-          next: (resp) => {
-            // Solo jugadores del equipo del entrenador
-            const jugadoresEquipo = resp.filter(
-              (j) => j.id_equipo?.toString() === this.idEquipo
-            );
-            this.jugadores = this.mapearPosiciones(jugadoresEquipo);
-          },
-          error: (err) => console.error(err),
-        });
+      const equipoUsuario = equipos.find(
+        (e) => e.id.toString() === this.idEquipo
+      );
+      if (equipoUsuario) {
+        this.cargarJugadores();
       } else {
         this.jugadores = [];
       }
     });
   }
 
-  mapearPosiciones(jugadores: Jugador[]): JugadorConPos[] {
-    const posicionesY = {
-      portero: 10,
-      defensa: 30,
-      medio: 55,
-      delantero: 80,
-    };
+  cargarUsuario(): void {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const user = JSON.parse(token);
+      this.tipoUsuario = user.data.tipo_usuario;
+      this.idEquipo = user.data.id_equipo;
+    }
+  }
 
-    const agrupados = {
-      portero: jugadores.filter((j) => j.posicion === 'PT'),
-      defensa: jugadores.filter((j) => j.posicion === 'DF'),
-      medio: jugadores.filter((j) => j.posicion === 'MC'),
-      delantero: jugadores.filter((j) => j.posicion === 'DL'),
-    };
-
-    const jugadoresConPos: JugadorConPos[] = [];
-
-    Object.entries(agrupados).forEach(([tipo, lista]) => {
-      const cantidad = lista.length;
-      lista.forEach((jugador, index) => {
-        const posX = (100 / (cantidad + 1)) * (index + 1);
-        const posY = posicionesY[tipo as keyof typeof posicionesY];
-        jugadoresConPos.push({ ...jugador, posX, posY });
-      });
+  cargarJugadores(): void {
+    this.mainService.getJugadores().subscribe((resp) => {
+      const jugadoresEquipo = resp.filter(
+        (j) => j.id_equipo?.toString() === this.idEquipo
+      );
+      const titulares = jugadoresEquipo.filter((j) => j.once_inicial);
+      this.jugadoresSuplentes = jugadoresEquipo.filter((j) => !j.once_inicial);
+      this.jugadores = this.mapearPosiciones(titulares);
     });
+  }
 
-    return jugadoresConPos;
+  mapearPosiciones(jugadores: Jugador[]): PosicionCampo[] {
+    const estructura = {
+      portero: { cantidad: 1, codigo: 'PT', y: 10 },
+      defensa: { cantidad: 4, codigo: 'DF', y: 30 },
+      medio: { cantidad: 3, codigo: 'MC', y: 55 },
+      delantero: { cantidad: 3, codigo: 'DL', y: 80 },
+    };
+
+    const resultado: PosicionCampo[] = [];
+
+    for (const [linea, { cantidad, codigo, y }] of Object.entries(estructura)) {
+      const jugadoresLinea = jugadores.filter((j) => j.posicion === codigo);
+      for (let i = 0; i < cantidad; i++) {
+        resultado.push({
+          id: `${linea}-${i}`,
+          posicion: linea,
+          posX: (100 / (cantidad + 1)) * (i + 1),
+          posY: y,
+          jugador: jugadoresLinea[i],
+        });
+      }
+    }
+
+    return resultado;
+  }
+
+  abrirSeleccion(posicion: string, id: string): void {
+    const codigoPos = this.obtenerCodigoPosicion(posicion);
+    this.posicionSeleccionada = { linea: posicion, id };
+    this.jugadoresCompatibles = this.jugadoresSuplentes.filter(
+      (j) => j.posicion === codigoPos
+    );
+  }
+
+  cerrarSeleccion(): void {
+    this.posicionSeleccionada = null;
+    this.jugadoresCompatibles = [];
+  }
+
+  asignarASlot(jugador: Jugador): void {
+    const seleccion = this.posicionSeleccionada;
+    if (
+      !seleccion ||
+      jugador.posicion !== this.obtenerCodigoPosicion(seleccion.linea)
+    )
+      return;
+
+    jugador.once_inicial = true;
+    this.mainService.updateJugador(jugador.id, jugador).subscribe(() => {
+      const idx = this.jugadores.findIndex((p) => p.id === seleccion.id);
+      if (idx !== -1) this.jugadores[idx].jugador = jugador;
+
+      this.jugadoresSuplentes = this.jugadoresSuplentes.filter(
+        (j) => j.id !== jugador.id
+      );
+      this.cerrarSeleccion();
+    });
+  }
+
+  mandarAlBanquillo(jugador: Jugador, posicionId: string): void {
+    jugador.once_inicial = false;
+    this.mainService.updateJugador(jugador.id, jugador).subscribe(() => {
+      const idx = this.jugadores.findIndex((p) => p.id === posicionId);
+      if (idx !== -1) this.jugadores[idx].jugador = undefined;
+
+      this.jugadoresSuplentes = [
+        ...this.jugadoresSuplentes.filter((j) => j.id !== jugador.id),
+        jugador,
+      ];
+    });
+  }
+
+  obtenerCodigoPosicion(pos: string): string {
+    const mapa: { [key: string]: string } = {
+      portero: 'PT',
+      defensa: 'DF',
+      medio: 'MC',
+      delantero: 'DL',
+    };
+    return mapa[pos] || '';
   }
 }

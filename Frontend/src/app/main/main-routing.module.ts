@@ -38,6 +38,11 @@ const routes: Routes = [
     path: 'ligas',
     loadChildren: () =>
       import('./modules/liga/liga.module').then((m) => m.LigaModule),
+  },
+  {
+    path: 'usuarios',
+    loadChildren: () => 
+      import('./modules/usuarios/usuarios.module').then((m) => m.UsuariosModule)
   }
 ];
 

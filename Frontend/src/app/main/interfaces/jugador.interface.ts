@@ -15,4 +15,5 @@ export interface Jugador {
     posicion:         string | null;
     id_equipo:        string | null;
     nombre_equipo:    string | null;
+    once_inicial:     boolean;
 }

@@ -37,6 +37,7 @@ export class FormJugadorComponent {
       imagen: [''],
       posicion: ['', Validators.required],
       id_equipo: [''],
+      once_inicial: [false]
     });
   }
 
