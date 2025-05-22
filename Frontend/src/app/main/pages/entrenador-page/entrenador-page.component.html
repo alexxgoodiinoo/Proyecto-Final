@@ -23,16 +23,18 @@
           [style.top.%]="jugador.posY"
           style="transform: translate(-50%, -50%)"
         >
-          <img
-            [src]="jugador | imagenJugadorPipe"
-            alt="{{ jugador.nombre }}"
-            class="w-12 h-12 rounded-full border-2 border-white mx-auto"
-          />
-          <div
-            class="text-xs text-white bg-black bg-opacity-70 px-1 rounded mt-1"
-          >
-            {{ jugador.nombre }}
-          </div>
+          <a href="/main/jugadores/{{ jugador.id }}">
+            <img
+              [src]="jugador | imagenJugadorPipe"
+              alt="{{ jugador.nombre }}"
+              class="w-12 h-12 rounded-full border-2 border-white mx-auto"
+            />
+            <div
+              class="text-xs text-white bg-black bg-opacity-70 px-1 rounded mt-1"
+            >
+              {{ jugador.nombre }}
+            </div>
+          </a>
         </div>
       </div>
     </body>
