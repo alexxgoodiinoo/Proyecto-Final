@@ -79,6 +79,7 @@ const createNewPlayer = async (req, res) => {
         dorsal: body.dorsal,
         posicion: body.posicion,
         id_equipo: id_equipo,
+        once_inicial: body.once_inicial,
     };
     try{
         const createdPlayer = await jugadoresService.createNewPlayer(newPlayer);

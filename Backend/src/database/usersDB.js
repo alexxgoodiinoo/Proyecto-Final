@@ -2,7 +2,17 @@ const cliente = require("./BBDD");
 
 async function getUsers() {
   try {
-    const respuesta = await cliente.query('SELECT * FROM public."Usuarios"');
+    const respuesta = await cliente.query(`
+      SELECT 
+        u.id,
+        u.username,
+        u.email,
+        u.tipo_usuario, 
+        u.id_equipo,
+        e.nombre AS nombre_equipo
+      FROM public."Usuarios" u
+      LEFT JOIN public."Equipos" e ON u.id_equipo = e.id
+      `);
     return respuesta.rows;
   } catch (err) {
     console.error("Error", err);
@@ -27,7 +37,14 @@ async function createNewUser(newUser) {
   try {
     const respuesta = await cliente.query(
       'INSERT INTO public."Usuarios"(id, username, password, email, tipo_usuario, id_equipo) VALUES ($1, $2, $3, $4, $5, $6)',
-      [newUser.id, newUser.username, newUser.password, newUser.email, newUser.tipo_usuario, newUser.id_equipo]
+      [
+        newUser.id,
+        newUser.username,
+        newUser.password,
+        newUser.email,
+        newUser.tipo_usuario,
+        newUser.id_equipo,
+      ]
     );
 
     return respuesta.rows;

@@ -13,6 +13,7 @@ async function getPlayers() {
         j.dorsal,
         j.partidos_jugados,
         j.posicion,
+        j.once_inicial,
         j.id_equipo,
         e.nombre AS nombre_equipo
       FROM public."Jugadores" j
@@ -39,6 +40,7 @@ async function getOnePlayer(playerId) {
         j.dorsal,
         j.partidos_jugados,
         j.posicion,
+        j.once_inicial,
         j.id_equipo,
         e.nombre AS nombre_equipo 
       FROM public."Jugadores" j
@@ -54,9 +56,10 @@ async function getOnePlayer(playerId) {
 }
 
 async function createNewPlayer(newPlayer) {
+  console.log(newPlayer);
   try {
     const respuesta = await cliente.query(
-      'INSERT INTO public."Jugadores"(id, nombre, apellidos, imagen, dorsal, id_equipo, posicion) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+      'INSERT INTO public."Jugadores"(id, nombre, apellidos, imagen, dorsal, id_equipo, posicion, once_inicial) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
       [
         newPlayer.id,
         newPlayer.nombre,
@@ -65,6 +68,7 @@ async function createNewPlayer(newPlayer) {
         newPlayer.dorsal,
         newPlayer.id_equipo,
         newPlayer.posicion,
+        newPlayer.once_inicial
       ]
     );
 
@@ -78,7 +82,7 @@ async function createNewPlayer(newPlayer) {
 async function updateOnePlayer(updatePlayer, playerId) {
   try {
     const respuesta = await cliente.query(
-      'UPDATE public."Jugadores" SET nombre = $1, apellidos = $2, imagen = $3, goles = $4, asistencias = $5, dorsal = $6, partidos_jugados = $7, id_equipo = $8, posicion = $9 WHERE id = $10',
+      'UPDATE public."Jugadores" SET nombre = $1, apellidos = $2, imagen = $3, goles = $4, asistencias = $5, dorsal = $6, partidos_jugados = $7, id_equipo = $8, posicion = $9, once_inicial = $10 WHERE id = $11',
       [
         updatePlayer.nombre,
         updatePlayer.apellidos,
@@ -89,6 +93,7 @@ async function updateOnePlayer(updatePlayer, playerId) {
         updatePlayer.partidos_jugados,
         updatePlayer.id_equipo,
         updatePlayer.posicion,
+        updatePlayer.once_inicial,
         playerId,
       ]
     );
