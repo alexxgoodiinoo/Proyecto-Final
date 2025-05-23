@@ -101,17 +101,21 @@
             />
           </ng-template>
         </td>
-        <td class="px-2 sm:px-4 py-2 text-center text-xs sm:text-base">
+        <td class="px-6 py-4 text-center">
           <ng-container
             *ngIf="editandoUsuarioId !== usuario.id; else editTipoUsuario"
           >
             {{ usuario.tipo_usuario }}
           </ng-container>
           <ng-template #editTipoUsuario>
-            <input
+            <select
               [(ngModel)]="usuario.tipo_usuario"
-              class="border-2 border-green-600 px-2 sm:px-3 py-1 rounded w-full"
-            />
+              class="border-2 border-green-600 px-3 py-1 rounded w-full"
+            >
+              <option value="" disabled>Selecciona el tipo</option>
+              <option value="manager">Manager</option>
+              <option value="invitado">Invitado</option>
+            </select>
           </ng-template>
         </td>
         <td class="px-2 sm:px-4 py-2 text-center text-xs sm:text-base">
@@ -122,10 +126,7 @@
           </ng-container>
           <ng-template #editEquipo>
             <ng-container
-              *ngIf="
-                usuario.tipo_usuario === 'manager';
-                else noEditableEquipo
-              "
+              *ngIf="usuario.tipo_usuario === 'manager'; else noEditableEquipo"
             >
               <select
                 [(ngModel)]="usuario.id_equipo"
