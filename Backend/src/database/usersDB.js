@@ -6,6 +6,7 @@ async function getUsers() {
       SELECT 
         u.id,
         u.username,
+        u.password,
         u.email,
         u.tipo_usuario, 
         u.id_equipo,
