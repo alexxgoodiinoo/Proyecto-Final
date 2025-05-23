@@ -12,12 +12,21 @@ import { Router } from '@angular/router';
 export class TableUsuariosComponent {
   public filtroNombre: string = '';
   public equipos: Equipo[] = [];
+  public equiposSinEntrenador: Equipo[] = [];
   public usuarios: Usuario[] = [];
   editandoUsuarioId: string | null = null;
 
   constructor(private mainService: MainService, private router: Router) {}
 
   ngOnInit(): void {
+    this.cargarUsuarios();
+
+    this.mainService
+      .getEquipos()
+      .subscribe((equipo) => (this.equipos = equipo));
+  }
+
+  cargarUsuarios() {
     this.mainService
       .getUsuarios()
       .subscribe((usuario) => (this.usuarios = usuario));
@@ -38,6 +47,7 @@ export class TableUsuariosComponent {
     this.mainService.updateUsuario(usuario.id, usuario).subscribe({
       next: () => {
         this.editandoUsuarioId = null;
+        this.cargarUsuarios();
       },
       error: (err) => {
         console.error('Error al actualizar el usuario', err);

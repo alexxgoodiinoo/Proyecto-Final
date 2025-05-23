@@ -121,12 +121,31 @@
             {{ usuario.nombre_equipo || "Sin equipo" }}
           </ng-container>
           <ng-template #editEquipo>
-            <input
-              [(ngModel)]="usuario.id_equipo"
-              class="border-2 border-green-600 px-2 sm:px-3 py-1 rounded w-full"
-            />
+            <ng-container
+              *ngIf="
+                usuario.tipo_usuario === 'manager';
+                else noEditableEquipo
+              "
+            >
+              <select
+                [(ngModel)]="usuario.id_equipo"
+                class="border-2 border-green-600 px-3 py-1 rounded w-full"
+              >
+                <option value="" disabled>Selecciona el equipo</option>
+                <option [ngValue]="null">Sin equipo</option>
+                <option *ngFor="let equipo of equipos" [ngValue]="equipo.id">
+                  {{ equipo.nombre }}
+                </option>
+              </select>
+            </ng-container>
+            <ng-template #noEditableEquipo>
+              <span class="text-gray-500 italic"
+                >Solo entrenadores pueden tener equipo</span
+              >
+            </ng-template>
           </ng-template>
         </td>
+
         <td class="px-2 sm:px-4 py-2 text-center text-xs sm:text-base">
           <ng-container *ngIf="editandoUsuarioId !== usuario.id">
             <button

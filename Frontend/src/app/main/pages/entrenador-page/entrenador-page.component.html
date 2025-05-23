@@ -7,7 +7,6 @@
   <component-header />
 </ng-template>
 
-<!-- Vista del entrenador (manager) -->
 <ng-container *ngIf="tipoUsuario === 'manager' && equipoUsuario">
   <div class="flex flex-col items-center min-h-screen p-4">
     <div class="relative w-[500px] h-[550px] mt-5">
@@ -17,7 +16,6 @@
         class="w-full h-full object-cover"
       />
 
-      <!-- Posiciones en el campo -->
       <ng-container *ngFor="let pos of jugadores">
         <div
           class="absolute text-center"
@@ -56,7 +54,6 @@
         </div>
       </ng-container>
 
-      <!-- Banquillo -->
       <div class="mt-8 flex flex-wrap justify-center gap-4">
         <ng-container *ngFor="let suplente of jugadoresSuplentes">
           <div
@@ -75,7 +72,6 @@
     </div>
   </div>
 
-  <!-- Selección de jugador compatible -->
   <div
     *ngIf="posicionSeleccionada"
     class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
@@ -115,5 +111,13 @@
         Cancelar
       </button>
     </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="tipoUsuario === 'manager' && !equipoUsuario">
+  <div class="flex flex-col items-center justify-center min-h-100">
+    <p class="text-red-600 text-lg font-semibold">
+      Actualmente no perteneces a ningún equipo.  
+    </p>
   </div>
 </ng-container>
