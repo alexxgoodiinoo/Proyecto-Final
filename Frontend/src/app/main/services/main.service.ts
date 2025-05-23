@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environments } from '../../../environments/environments';
 import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { ApiResponseEquipo, Equipo } from '../interfaces/equipo.interface';
 import { ApiResponsePartido, Partido } from '../interfaces/partido.interface';
 import { ApiResponseJugador, Jugador } from '../interfaces/jugador.interface';
 import { ApiResponseUsuario, Usuario } from '../interfaces/usuario.interface';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ import { ApiResponseUsuario, Usuario } from '../interfaces/usuario.interface';
 export class MainService {
   constructor(private http: HttpClient) {}
 
-  private baseURL: string = environments.baseURL;
+  private baseURL: string = environment.baseURL;
 
   //Equipos
   getEquipos(): Observable<Equipo[]> {
