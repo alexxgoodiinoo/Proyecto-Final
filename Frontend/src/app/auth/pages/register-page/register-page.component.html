@@ -1,12 +1,12 @@
 <div
-  class="flex flex-col mt-10 bg-gradient-to-b from-green-500 to-green-400 p-6 rounded-lg shadow-lg text-white w-full max-w-md mx-auto px-4 sm:px-6"
+  class="flex flex-col mt-10 bg-gradient-to-b from-green-500 to-green-400 p-4 rounded-lg shadow-lg text-white w-full max-w-xs mx-auto"
 >
-  <span class="text-lg mb-2 font-bold text-center uppercase text-green-200">
+  <span class="text-base mb-2 font-bold text-center uppercase text-green-200">
     Registro
   </span>
   <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
-    <div class="mb-4">
-      <label for="username" class="block text-sm font-medium text-green-200">
+    <div class="mb-3">
+      <label for="username" class="block text-xs font-medium text-green-200">
         Usuario
       </label>
       <input
@@ -14,14 +14,14 @@
         type="text"
         placeholder="Nombre de usuario"
         formControlName="username"
-        class="placeholder-green-600 w-full px-3 py-2 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 text-black bg-white"
+        class="placeholder-green-600 w-full px-2 py-1 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 text-black bg-white text-sm"
       />
       <div
         *ngIf="
           registerForm.get('username')?.touched &&
           registerForm.get('username')?.invalid
         "
-        class="text-red-700 text-sm"
+        class="text-red-700 text-xs"
       >
         <span *ngIf="registerForm.get('username')?.hasError('required')"
           >El usuario es obligatorio.
@@ -29,8 +29,8 @@
       </div>
     </div>
 
-    <div class="mb-4">
-      <label for="email" class="block text-sm font-medium text-green-200">
+    <div class="mb-3">
+      <label for="email" class="block text-xs font-medium text-green-200">
         Correo Electrónico
       </label>
       <input
@@ -38,14 +38,14 @@
         type="email"
         placeholder="Correo electrónico"
         formControlName="email"
-        class="placeholder-green-600 w-full px-3 py-2 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 text-black bg-white"
+        class="placeholder-green-600 w-full px-2 py-1 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 text-black bg-white text-sm"
       />
       <div
         *ngIf="
           registerForm.get('email')?.touched &&
           registerForm.get('email')?.invalid
         "
-        class="text-red-700 text-sm"
+        class="text-red-700 text-xs"
       >
         <span *ngIf="registerForm.get('email')?.hasError('required')"
           >El correo electrónico es obligatorio.
@@ -56,8 +56,8 @@
       </div>
     </div>
 
-    <div class="mb-4">
-      <label for="password" class="block text-sm font-medium text-green-200">
+    <div class="mb-3">
+      <label for="password" class="block text-xs font-medium text-green-200">
         Contraseña
       </label>
       <input
@@ -65,14 +65,14 @@
         type="password"
         placeholder="Contraseña"
         formControlName="password"
-        class="placeholder-green-600 w-full px-3 py-2 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 text-black bg-white"
+        class="placeholder-green-600 w-full px-2 py-1 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 text-black bg-white text-sm"
       />
       <div
         *ngIf="
           registerForm.get('password')?.touched &&
           registerForm.get('password')?.invalid
         "
-        class="text-red-700 text-sm"
+        class="text-red-700 text-xs"
       >
         <span *ngIf="registerForm.get('password')?.hasError('required')"
           >La contraseña es obligatoria.
@@ -83,8 +83,8 @@
       </div>
     </div>
 
-    <div class="mb-4">
-      <label for="password2" class="block text-sm font-medium text-green-200">
+    <div class="mb-3">
+      <label for="password2" class="block text-xs font-medium text-green-200">
         Repetir Contraseña
       </label>
       <input
@@ -92,14 +92,14 @@
         type="password"
         placeholder="Repite la contraseña"
         formControlName="password2"
-        class="placeholder-green-600 w-full px-3 py-2 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 text-black bg-white"
+        class="placeholder-green-600 w-full px-2 py-1 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 text-black bg-white text-sm"
       />
       <div
         *ngIf="
           registerForm.get('password2')?.touched &&
           registerForm.get('password2')?.invalid
         "
-        class="text-red-700 text-sm"
+        class="text-red-700 text-xs"
       >
         <span *ngIf="registerForm.get('password2')?.hasError('required')"
           >Debes confirmar la contraseña.
@@ -109,22 +109,22 @@
 
     <div
       *ngIf="registerForm.hasError('passwordNoIgual') && registerForm.touched"
-      class="text-red-700 text-sm mb-3"
+      class="text-red-700 text-xs mb-2"
     >
       <span>Las contraseñas no coinciden. </span>
     </div>
 
-    <div class="mb-4">
+    <div class="mb-3">
       <label
         for="tipo_usuario"
-        class="block text-sm font-medium text-green-200"
+        class="block text-xs font-medium text-green-200"
       >
         Tipo de usuario
       </label>
       <select
         id="tipo_usuario"
         formControlName="tipo_usuario"
-        class="w-full px-3 py-2 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 bg-white text-green-600"
+        class="w-full px-2 py-1 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 bg-white text-green-600 text-sm"
       >
         <option value="" disabled>Seleccione el tipo de usuario</option>
         <option value="manager" class="text-green-600">Entrenador</option>
@@ -135,7 +135,7 @@
           registerForm.get('tipo_usuario')?.touched &&
           registerForm.get('tipo_usuario')?.invalid
         "
-        class="text-red-700 text-sm"
+        class="text-red-700 text-xs"
       >
         <span *ngIf="registerForm.get('tipo_usuario')?.hasError('required')"
           >El tipo de usuario es obligatorio.
@@ -143,14 +143,14 @@
       </div>
     </div>
 
-    <div class="mb-4" *ngIf="mostrarSeleccionEquipo">
-      <label for="id_equipo" class="block text-sm font-medium text-green-200">
+    <div class="mb-3" *ngIf="mostrarSeleccionEquipo">
+      <label for="id_equipo" class="block text-xs font-medium text-green-200">
         Seleccione su equipo
       </label>
       <select
         id="id_equipo"
         formControlName="id_equipo"
-        class="w-full px-3 py-2 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 bg-white text-green-600"
+        class="w-full px-2 py-1 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 bg-white text-green-600 text-sm"
       >
         <option value="" disabled>Seleccione tu equipo</option>
         <option
@@ -165,11 +165,11 @@
 
     <button
       type="submit"
-      class="flex items-center justify-center w-full px-4 py-2 bg-green-400 text-white rounded-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2 font-bold shadow-md cursor-pointer transition-all"
+      class="flex items-center justify-center w-full px-3 py-2 bg-green-400 text-white rounded-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2 font-bold shadow-md cursor-pointer text-sm transition-all"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="h-5 w-5 mr-2 text-green-200"
+        class="h-4 w-4 mr-1.5 text-green-200"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -184,18 +184,21 @@
       Registrarse
     </button>
 
-    <div *ngIf="errorRegistro" class="text-red-700 mt-4 font-bold text-center">
+    <div
+      *ngIf="errorRegistro"
+      class="text-red-700 mt-3 font-bold text-center text-xs"
+    >
       {{ errorRegistro }}
     </div>
 
     <div
       *ngIf="registroCompletado"
-      class="text-green-700 mt-4 font-bold text-center"
+      class="text-green-700 mt-3 font-bold text-center text-xs"
     >
       Usuario registrado correctamente
     </div>
 
-    <div class="flex justify-end mt-5">
+    <div class="flex justify-end mt-4 text-xs">
       <a routerLink="/auth/login" class="text-green-100 hover:underline">
         ¿Ya tienes cuenta?
       </a>

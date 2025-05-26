@@ -1,12 +1,12 @@
 <div
-  class="flex flex-col mt-10 bg-gradient-to-b from-green-600 to-green-400 p-6 rounded-lg shadow-lg text-white w-full max-w-md mx-auto px-4 sm:px-6"
+  class="flex flex-col mt-10 bg-gradient-to-b from-green-600 to-green-400 p-4 rounded-lg shadow-lg text-white w-full max-w-xs mx-auto"
 >
-  <span class="text-lg mb-4 font-bold text-center uppercase text-green-200">
+  <span class="text-base mb-3 font-bold text-center uppercase text-green-200">
     Login
   </span>
   <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-    <div class="mb-4">
-      <label for="username" class="block text-sm font-medium text-green-200">
+    <div class="mb-3">
+      <label for="username" class="block text-xs font-medium text-green-200">
         Usuario
       </label>
       <input
@@ -15,21 +15,21 @@
         type="text"
         placeholder="Nombre de usuario"
         formControlName="username"
-        class="placeholder-green-600 w-full px-3 py-2 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 text-black bg-white"
+        class="placeholder-green-600 w-full px-2 py-1 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 text-black bg-white text-sm"
       />
       <div
         *ngIf="
           loginForm.get('username')?.touched &&
           loginForm.get('username')?.invalid
         "
-        class="text-red-700 text-sm mt-1"
+        class="text-red-700 text-xs mt-1"
       >
         El usuario es obligatorio
       </div>
     </div>
 
-    <div class="mb-4">
-      <label for="password" class="block text-sm font-medium text-green-200">
+    <div class="mb-3">
+      <label for="password" class="block text-xs font-medium text-green-200">
         Contraseña
       </label>
       <input
@@ -38,14 +38,14 @@
         type="password"
         placeholder="Contraseña"
         formControlName="password"
-        class="placeholder-green-600 w-full px-3 py-2 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 text-black bg-white"
+        class="placeholder-green-600 w-full px-2 py-1 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 text-black bg-white text-sm"
       />
       <div
         *ngIf="
           loginForm.get('password')?.touched &&
           loginForm.get('password')?.invalid
         "
-        class="text-red-700 text-sm mt-1"
+        class="text-red-700 text-xs mt-1"
       >
         La contraseña es obligatoria
       </div>
@@ -53,11 +53,11 @@
 
     <button
       type="submit"
-      class="flex items-center justify-center w-full px-4 py-2 bg-green-400 text-white rounded-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2 font-bold shadow-md cursor-pointer transition-all"
+      class="flex items-center justify-center w-full px-3 py-2 bg-green-400 text-white rounded-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2 font-bold shadow-md cursor-pointer text-sm transition-all"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="h-5 w-5 mr-2 text-green-200"
+        class="h-4 w-4 mr-1.5 text-green-200"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -72,11 +72,14 @@
       Ingresar
     </button>
 
-    <div *ngIf="noLogueado" class="text-red-700 mt-4 font-bold text-center">
+    <div
+      *ngIf="noLogueado"
+      class="text-red-700 mt-3 font-bold text-center text-xs"
+    >
       Usuario o contraseña no válidos
     </div>
 
-    <div class="flex justify-end mt-5">
+    <div class="flex justify-end mt-4 text-xs">
       <a routerLink="/auth/register" class="text-green-100 hover:underline">
         ¿No tienes cuenta?
       </a>
