@@ -1,3 +1,3 @@
 export const environment = {
-  baseURL: 'https://proyecto-final-ussz.onrender.com',
+  baseURL: 'https://backendproyecto-final.onrender.com',
 };
