@@ -1,5 +1,5 @@
 <div
-  class="flex flex-col bg-gradient-to-b from-green-500 to-green-400 p-6 rounded-lg shadow-lg text-white"
+  class="flex flex-col mt-10 bg-gradient-to-b from-green-500 to-green-400 p-6 rounded-lg shadow-lg text-white w-full max-w-md mx-auto px-4 sm:px-6"
 >
   <span class="text-lg mb-2 font-bold text-center uppercase text-green-200">
     Registro
@@ -165,7 +165,7 @@
 
     <button
       type="submit"
-      class="flex items-center px-4 py-2 bg-green-400 text-white rounded-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2 font-bold shadow-md cursor-pointer"
+      class="flex items-center justify-center w-full px-4 py-2 bg-green-400 text-white rounded-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2 font-bold shadow-md cursor-pointer transition-all"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -184,11 +184,14 @@
       Registrarse
     </button>
 
-    <div *ngIf="errorRegistro" class="text-red-700 mt-4 font-bold">
+    <div *ngIf="errorRegistro" class="text-red-700 mt-4 font-bold text-center">
       {{ errorRegistro }}
     </div>
 
-    <div *ngIf="registroCompletado" class="text-green-700 mt-4 font-bold">
+    <div
+      *ngIf="registroCompletado"
+      class="text-green-700 mt-4 font-bold text-center"
+    >
       Usuario registrado correctamente
     </div>
 
