@@ -60,7 +60,7 @@ Asegurate de tener instalado Angular CLI y Node.js.
 
 ## 🌐 Enlace a la aplicación
 
-[Haz clic aquí para ver la aplicación en funcionamiento](https://)
+[Haz clic aquí para ver la aplicación en funcionamiento](https://proyecto-final-one-nu.vercel.app/auth/login)
 
 ## 📄 Licencia
 
