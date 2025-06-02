@@ -19,6 +19,7 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<User | null> {
+    console.log(`${this.baseUrl}/usuarios/${username}/${password}`);
     return this.httpClient
       .get<User>(`${this.baseUrl}/usuarios/${username}/${password}`)
       .pipe(
