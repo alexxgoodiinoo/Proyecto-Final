@@ -19,12 +19,14 @@ import { MainService } from '../../../main/services/main.service';
   templateUrl: './register-page.component.html',
   styles: ``,
 })
-export class RegisterPageComponent implements OnInit{
+export class RegisterPageComponent implements OnInit {
   public registerForm: FormGroup;
   public errorRegistro: string | null = null;
   public registroCompletado: boolean = false;
   public mostrarSeleccionEquipo: boolean = false;
   public equipos: Equipo[] = [];
+  mostrarPassword1: boolean = false;
+  mostrarPassword2: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -39,22 +41,32 @@ export class RegisterPageComponent implements OnInit{
         tipo_usuario: ['', Validators.required],
         password: ['', [Validators.required, Validators.minLength(8)]],
         password2: ['', Validators.required],
-        id_equipo: ['']
+        id_equipo: [''],
       },
       {
         validators: [this.passwordsIgualesValidator],
       }
     );
 
-    this.registerForm.get('tipo_usuario')?.valueChanges.subscribe(
-      valor => this.mostrarSeleccionEquipo = valor === "manager"
-    );
+    this.registerForm
+      .get('tipo_usuario')
+      ?.valueChanges.subscribe(
+        (valor) => (this.mostrarSeleccionEquipo = valor === 'manager')
+      );
   }
 
   ngOnInit(): void {
-    this.mainService.getEquipos().subscribe(
-      equipos => this.equipos = equipos
-    )
+    this.mainService
+      .getEquipos()
+      .subscribe((equipos) => (this.equipos = equipos));
+  }
+
+  togglePassword1(): void {
+    this.mostrarPassword1 = !this.mostrarPassword1;
+  }
+
+  togglePassword2(): void {
+    this.mostrarPassword2 = !this.mostrarPassword2;
   }
 
   private passwordsIgualesValidator(
@@ -69,7 +81,9 @@ export class RegisterPageComponent implements OnInit{
     this.errorRegistro = null;
     this.registerForm.markAllAsTouched();
 
-    if (this.registerForm.invalid) { return; }
+    if (this.registerForm.invalid) {
+      return;
+    }
 
     const valores = this.registerForm.value;
     const nuevoUsuario: User = {
@@ -80,27 +94,29 @@ export class RegisterPageComponent implements OnInit{
       id_equipo: '',
     };
 
-    this.authService.usernameExists(nuevoUsuario.username, nuevoUsuario.password).subscribe({
-      next: (user) => {
-        if (!user) {
-          this.authService.register(nuevoUsuario).subscribe({
-            next: () => {
-              this.registerForm.reset();
-              this.registroCompletado = true;
-              this.router.navigate(['/auth/register']);
-            },
-            error: (err) => {
-              this.errorRegistro = 'Hubo un error al registrar el usuario.';
-              console.log(err);
-            },
-          });
-        } else {
-          this.errorRegistro = 'El usuario ya está registrado.';
-        }
-      },
-      error: (err) => {
-        this.errorRegistro = 'Hubo un problema al verificar el usuario.';
-      },
-    });
+    this.authService
+      .usernameExists(nuevoUsuario.username, nuevoUsuario.password)
+      .subscribe({
+        next: (user) => {
+          if (!user) {
+            this.authService.register(nuevoUsuario).subscribe({
+              next: () => {
+                this.registerForm.reset();
+                this.registroCompletado = true;
+                this.router.navigate(['/auth/register']);
+              },
+              error: (err) => {
+                this.errorRegistro = 'Hubo un error al registrar el usuario.';
+                console.log(err);
+              },
+            });
+          } else {
+            this.errorRegistro = 'El usuario ya está registrado.';
+          }
+        },
+        error: (err) => {
+          this.errorRegistro = 'Hubo un problema al verificar el usuario.';
+        },
+      });
   }
 }

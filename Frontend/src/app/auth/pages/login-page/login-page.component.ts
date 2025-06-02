@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginPageComponent implements OnInit {
   loginForm!: FormGroup;
   noLogueado: boolean = false;
+  mostrarPassword: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -24,6 +25,10 @@ export class LoginPageComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
+  }
+
+  togglePassword(): void {
+    this.mostrarPassword =! this.mostrarPassword;
   }
 
   onLogin(): void {

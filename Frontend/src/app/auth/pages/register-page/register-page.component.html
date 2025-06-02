@@ -56,17 +56,65 @@
       </div>
     </div>
 
-    <div class="mb-3">
+    <div class="mb-3 relative">
       <label for="password" class="block text-xs font-medium text-green-200"
         >Contraseña</label
       >
       <input
         id="password"
-        type="password"
+        [type]="mostrarPassword1 ? 'text' : 'password'"
         placeholder="Contraseña"
         formControlName="password"
         class="placeholder-green-600 w-full px-3 py-2 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 bg-white text-black text-sm"
       />
+      <button
+        type="button"
+        (click)="togglePassword1()"
+        class="absolute right-3 top-9 transform -translate-y-1/2 text-green-600"
+      >
+        <svg
+          *ngIf="!mostrarPassword1"
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+          />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+          />
+        </svg>
+        <svg
+          *ngIf="mostrarPassword1"
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7a9.993 9.993 0 012.397-3.568m3.137-2.244A9.964 9.964 0 0112 5c4.477 0 8.268 2.943 9.542 7a9.96 9.96 0 01-1.507 2.606M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+          />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 3l18 18"
+          />
+        </svg>
+      </button>
       <div
         *ngIf="
           registerForm.get('password')?.touched &&
@@ -83,17 +131,65 @@
       </div>
     </div>
 
-    <div class="mb-3">
+    <div class="mb-3 relative">
       <label for="password2" class="block text-xs font-medium text-green-200"
         >Repetir Contraseña</label
       >
       <input
         id="password2"
-        type="password"
+        [type]="mostrarPassword2 ? 'text' : 'password'"
         placeholder="Repite la contraseña"
         formControlName="password2"
         class="placeholder-green-600 w-full px-3 py-2 border border-green-400 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-300 bg-white text-black text-sm"
       />
+      <button
+        type="button"
+        (click)="togglePassword2()"
+        class="absolute right-3 top-9 transform -translate-y-1/2 text-green-600"
+      >
+        <svg
+          *ngIf="!mostrarPassword2"
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+          />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+          />
+        </svg>
+        <svg
+          *ngIf="mostrarPassword2"
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7a9.993 9.993 0 012.397-3.568m3.137-2.244A9.964 9.964 0 0112 5c4.477 0 8.268 2.943 9.542 7a9.96 9.96 0 01-1.507 2.606M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+          />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 3l18 18"
+          />
+        </svg>
+      </button>
       <div
         *ngIf="
           registerForm.get('password2')?.touched &&
